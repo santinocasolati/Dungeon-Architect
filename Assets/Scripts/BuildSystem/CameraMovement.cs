@@ -13,7 +13,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float movementTime = 0.1f;
     [SerializeField] private Vector3 zoomAmount, zoomLimitClose, zoomLimitFar;
     [SerializeField] private CinemachineVirtualCamera cameraReference;
-    [SerializeField] private int constraintXMax = 5, constraintXMin = -5, constraintZMax = 5, constraintZMin = -5;
 
     private CinemachineTransposer cameraTransposer;
     private Vector3 newZoom;

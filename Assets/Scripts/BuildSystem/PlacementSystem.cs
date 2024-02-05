@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -9,8 +10,9 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Grid grid;
     [SerializeField] private PreviewSystem previewSystem;
     [SerializeField] private ObjectsDatabaseSO database;
-    [SerializeField] private GameObject gridVisualization;
+    [SerializeField] private string gridVisualizationTag;
     [SerializeField] private ObjectPlacer objectPlacer;
+    [SerializeField] private float yPos;
 
     private GridData floorData, objectsData;
     private IBuildingState buildingState;
@@ -25,16 +27,30 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int id)
     {
         StopPlacement();
-        gridVisualization.SetActive(true);
+
+        VisualizatorStateSetter(true);
+
         buildingState = new PlacementState(id, grid, previewSystem, database, floorData, objectsData, objectPlacer);
         inputDetector.OnMousePressed += PlaceStructure;
         inputDetector.OnCancel += StopPlacement;
     }
 
+    private void VisualizatorStateSetter(bool state)
+    {
+        GameObject[] visualizators = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.CompareTag(gridVisualizationTag) && obj.scene.isLoaded).ToArray();
+
+        foreach (GameObject visualizator in visualizators)
+        {
+            visualizator.SetActive(state);
+        }
+    }
+
     public void StartRemoving()
     {
         StopPlacement();
-        gridVisualization.SetActive(true);
+
+        VisualizatorStateSetter(true);
+
         buildingState = new RemovingState(grid, previewSystem, floorData, objectsData, objectPlacer);
         inputDetector.OnMousePressed += PlaceStructure;
         inputDetector.OnCancel += StopPlacement;
@@ -51,14 +67,14 @@ public class PlacementSystem : MonoBehaviour
         Vector3 objectPos = grid.CellToWorld(gridPos);
         objectPos.x -= 1;
         objectPos.z -= 1;
-        objectPos.y = 0;
+        objectPos.y = yPos;
 
         buildingState.OnAction(gridPos, objectPos);
     }
 
     private void StopPlacement()
     {
-        gridVisualization.SetActive(false);
+        VisualizatorStateSetter(false);
         
         if (buildingState != null)
         {
