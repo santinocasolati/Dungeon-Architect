@@ -18,4 +18,8 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 6927710653586100562, guid: 6fb892c1363049b4ca3f1e72854b9a63,
       type: 3}
-    <ObjectType>k__BackingField: 0
+  - <Name>k__BackingField: Test1
+    <Id>k__BackingField: 1
+    <Size>k__BackingField: {x: 2, y: 1}
+    <Prefab>k__BackingField: {fileID: 6927710653586100562, guid: fef17a72fd53af04cbb8d6ea8d60228e,
+      type: 3}

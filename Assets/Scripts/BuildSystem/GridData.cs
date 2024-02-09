@@ -38,19 +38,38 @@ public class GridData
         return returnVal;
     }
 
-    public bool CanPlaceObjectAt(Vector3Int gridPosition, Vector2Int objectSize)
+    public bool CanPlaceObjectAt(Vector3Int gridPosition, Vector2Int objectSize, Grid grid)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
 
         foreach (var pos in positionToOccupy)
         {
-            if (placedObjects.ContainsKey(pos))
+            if (placedObjects.ContainsKey(pos) || !CheckForObjectAtPosition(grid.CellToWorld(pos)))
             {
                 return false;
             }
         }
 
         return true;
+    }
+
+    public bool CheckForObjectAtPosition(UnityEngine.Vector3 position)
+    {
+        UnityEngine.Vector3 rayOrigin = new UnityEngine.Vector3(position.x, position.y + 1f, position.z);
+        UnityEngine.Vector3 rayDirection = position - rayOrigin;
+
+        int placeableLayer = 1 << LayerMask.NameToLayer("Placeable");
+
+        RaycastHit hit;
+        if (Physics.Raycast(rayOrigin, rayDirection, out hit, Mathf.Infinity, placeableLayer))
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Placeable"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public int GetRepresentationIndex(Vector3Int gridPos)

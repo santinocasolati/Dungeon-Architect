@@ -9,17 +9,15 @@ public class PlacementState : IBuildingState
     private Grid grid;
     private PreviewSystem previewSystem;
     private ObjectsDatabaseSO database;
-    private GridData floorData;
     private GridData objectsData;
     private ObjectPlacer objectPlacer;
 
-    public PlacementState(int id, Grid grid, PreviewSystem previewSystem, ObjectsDatabaseSO database, GridData floorData, GridData objectsData, ObjectPlacer objectPlacer)
+    public PlacementState(int id, Grid grid, PreviewSystem previewSystem, ObjectsDatabaseSO database, GridData objectsData, ObjectPlacer objectPlacer)
     {
         this.id = id;
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.database = database;
-        this.floorData = floorData;
         this.objectsData = objectsData;
         this.objectPlacer = objectPlacer;
 
@@ -47,15 +45,12 @@ public class PlacementState : IBuildingState
 
         int index = objectPlacer.PlaceObject(database.objects[selectedObjectIndex].Prefab, objectPos);
 
-        GridData selectedData = database.objects[selectedObjectIndex].ObjectType == ObjectType.Floor ? floorData : objectsData;
-        selectedData.AddObjectAt(gridPos, database.objects[selectedObjectIndex].Size, database.objects[selectedObjectIndex].Id, index);
+        objectsData.AddObjectAt(gridPos, database.objects[selectedObjectIndex].Size, database.objects[selectedObjectIndex].Id, index);
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
-        GridData selectedData = database.objects[selectedObjectIndex].ObjectType == ObjectType.Floor ? floorData : objectsData;
-
-        return selectedData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size);
+        return objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid);
     }
 
     public void UpdateState(Vector3Int gridPos)

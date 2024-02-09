@@ -12,11 +12,10 @@ public class RemovingState : IBuildingState
     private GridData objectsData;
     private ObjectPlacer objectPlacer;
 
-    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData floorData, GridData objectsData, ObjectPlacer objectPlacer)
+    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData objectsData, ObjectPlacer objectPlacer)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
-        this.floorData = floorData;
         this.objectsData = objectsData;
         this.objectPlacer = objectPlacer;
 
@@ -32,12 +31,9 @@ public class RemovingState : IBuildingState
     {
         GridData selectedData = null;
 
-        if (!objectsData.CanPlaceObjectAt(gridPos, Vector2Int.one))
+        if (!objectsData.CanPlaceObjectAt(gridPos, Vector2Int.one, grid))
         {
             selectedData = objectsData;
-        } else if (!floorData.CanPlaceObjectAt(gridPos, Vector2Int.one))
-        {
-            selectedData = floorData;
         }
 
         if (selectedData == null) return;
@@ -54,7 +50,7 @@ public class RemovingState : IBuildingState
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPos)
     {
-        return !(objectsData.CanPlaceObjectAt(gridPos, Vector2Int.one) && floorData.CanPlaceObjectAt(gridPos, Vector2Int.one));
+        return !(objectsData.CanPlaceObjectAt(gridPos, Vector2Int.one, grid));
     }
 
     public void UpdateState(Vector3Int gridPos)

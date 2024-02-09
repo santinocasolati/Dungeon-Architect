@@ -14,13 +14,12 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private ObjectPlacer objectPlacer;
     [SerializeField] private float yPos;
 
-    private GridData floorData, objectsData;
+    private GridData objectsData;
     private IBuildingState buildingState;
 
     private void Start()
     {
         StopPlacement();
-        floorData = new GridData();
         objectsData = new GridData();
     }
 
@@ -30,7 +29,7 @@ public class PlacementSystem : MonoBehaviour
 
         VisualizatorStateSetter(true);
 
-        buildingState = new PlacementState(id, grid, previewSystem, database, floorData, objectsData, objectPlacer);
+        buildingState = new PlacementState(id, grid, previewSystem, database, objectsData, objectPlacer);
         inputDetector.OnMousePressed += PlaceStructure;
         inputDetector.OnCancel += StopPlacement;
     }
@@ -51,7 +50,7 @@ public class PlacementSystem : MonoBehaviour
 
         VisualizatorStateSetter(true);
 
-        buildingState = new RemovingState(grid, previewSystem, floorData, objectsData, objectPlacer);
+        buildingState = new RemovingState(grid, previewSystem, objectsData, objectPlacer);
         inputDetector.OnMousePressed += PlaceStructure;
         inputDetector.OnCancel += StopPlacement;
     }

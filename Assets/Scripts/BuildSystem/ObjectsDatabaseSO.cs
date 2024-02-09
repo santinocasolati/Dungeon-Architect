@@ -22,9 +22,6 @@ public class ObjectData
 
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
-
-    [field: SerializeField]
-    public ObjectType ObjectType { get; private set; }
 }
 
 public enum ObjectType
