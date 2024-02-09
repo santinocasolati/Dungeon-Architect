@@ -71,7 +71,7 @@ public class PlacementSystem : MonoBehaviour
         buildingState.OnAction(gridPos, objectPos);
     }
 
-    private void StopPlacement()
+    public void StopPlacement()
     {
         VisualizatorStateSetter(false);
         
