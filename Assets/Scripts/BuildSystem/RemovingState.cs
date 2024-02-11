@@ -8,7 +8,6 @@ public class RemovingState : IBuildingState
     private int gameObjectIndex = -1;
     private Grid grid;
     private PreviewSystem previewSystem;
-    private GridData floorData;
     private GridData objectsData;
     private ObjectPlacer objectPlacer;
 
@@ -41,6 +40,11 @@ public class RemovingState : IBuildingState
         gameObjectIndex = selectedData.GetRepresentationIndex(gridPos);
 
         if (gameObjectIndex == -1) return;
+
+        if (selectedData.GetIfPosHasBoss(gridPos))
+        {
+            GameManager.instance.bossPlaced = false;
+        }
 
         selectedData.RemoveObjectAt(gridPos);
         objectPlacer.RemoveObjectAt(gameObjectIndex);

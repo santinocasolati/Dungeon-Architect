@@ -45,12 +45,17 @@ public class PlacementState : IBuildingState
 
         int index = objectPlacer.PlaceObject(database.objects[selectedObjectIndex].Prefab, objectPos);
 
-        objectsData.AddObjectAt(gridPos, database.objects[selectedObjectIndex].Size, database.objects[selectedObjectIndex].Id, index);
+        objectsData.AddObjectAt(gridPos, database.objects[selectedObjectIndex].Size, database.objects[selectedObjectIndex].Id, index, database.objects[selectedObjectIndex].isBoss);
+
+        if (database.objects[selectedObjectIndex].isBoss)
+        {
+            GameManager.instance.bossPlaced = true;
+        }
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
-        return objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid);
+        return (objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid) && !GameManager.instance.bossPlaced);
     }
 
     public void UpdateState(Vector3Int gridPos)

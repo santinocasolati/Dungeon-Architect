@@ -8,10 +8,10 @@ public class GridData
 {
     public Dictionary<Vector3Int, PlacementData> placedObjects = new();
 
-    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int id, int placedObjectIndex)
+    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int id, int placedObjectIndex, bool isBoss)
     {
         List<Vector3Int> positionsToOccupy = CalculatePositions(gridPosition, objectSize);
-        PlacementData data = new PlacementData(positionsToOccupy, id, placedObjectIndex);
+        PlacementData data = new PlacementData(positionsToOccupy, id, placedObjectIndex, isBoss);
 
         foreach (var pos in positionsToOccupy)
         {
@@ -89,6 +89,11 @@ public class GridData
             placedObjects.Remove(pos);
         }
     }
+
+    public bool GetIfPosHasBoss(Vector3Int gridPos)
+    {
+        return placedObjects[gridPos].IsBoss;
+    }
 }
 
 public class PlacementData
@@ -96,11 +101,13 @@ public class PlacementData
     public List<Vector3Int> occupiedPositions;
     public int ID { get; private set; }
     public int PlacedObjectIndex { get; private set; }
+    public bool IsBoss { get; private set; }
 
-    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex)
+    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex, bool isBoss)
     {
         this.occupiedPositions = occupiedPositions;
         ID = iD;
         PlacedObjectIndex = placedObjectIndex;
+        IsBoss = isBoss;
     }
 }
