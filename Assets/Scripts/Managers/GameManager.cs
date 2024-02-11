@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public UnityEvent OnRoundStart, OnRoundEnd;
-    public bool bossPlaced { get; set; }
+    public bool bossPlaced { get; private set; }
+    public GameObject bossInstance { get; private set; }
 
     [SerializeField] private NavMeshSurface walkableSurface;
 
@@ -42,5 +43,11 @@ public class GameManager : MonoBehaviour
     public void RoomPurchase()
     {
         walkableSurface.BuildNavMesh();
+    }
+
+    public void BossStatus(bool bossPlaced, GameObject bossInstance)
+    {
+        this.bossPlaced = bossPlaced;
+        this.bossInstance = bossInstance;
     }
 }

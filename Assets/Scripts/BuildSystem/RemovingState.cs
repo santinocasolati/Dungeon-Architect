@@ -41,13 +41,8 @@ public class RemovingState : IBuildingState
 
         if (gameObjectIndex == -1) return;
 
-        if (selectedData.GetIfPosHasBoss(gridPos))
-        {
-            GameManager.instance.bossPlaced = false;
-        }
-
+        objectPlacer.RemoveObjectAt(gameObjectIndex, selectedData.GetIfPosHasBoss(gridPos));
         selectedData.RemoveObjectAt(gridPos);
-        objectPlacer.RemoveObjectAt(gameObjectIndex);
 
         previewSystem.UpdatePosition(grid.CellToWorld(gridPos), CheckIfSelectionIsValid(gridPos));
     }

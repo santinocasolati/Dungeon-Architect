@@ -9,17 +9,28 @@ public class ObjectPlacer : MonoBehaviour
 
     private List<GameObject> placedGameObjects = new();
 
-    public int PlaceObject(GameObject prefab, Vector3 objectPos)
+    public int PlaceObject(GameObject prefab, Vector3 objectPos, bool isBoss)
     {
         GameObject objectInstance = Instantiate(prefab, placeContainer);
         objectInstance.transform.position = objectPos;
         placedGameObjects.Add(objectInstance);
+
+        if (isBoss)
+        {
+            GameManager.instance.BossStatus(true, objectInstance);
+        }
+
         return placedGameObjects.Count - 1;
     }
 
-    public void RemoveObjectAt(int gameObjectIndex)
+    public void RemoveObjectAt(int gameObjectIndex, bool isBoss)
     {
         if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex] == null) return;
+
+        if (isBoss)
+        {
+            GameManager.instance.BossStatus(false, null);
+        }
 
         Destroy(placedGameObjects[gameObjectIndex]);
     }
