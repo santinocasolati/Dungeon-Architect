@@ -24,20 +24,17 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    private void OnEnable()
+    public void StartRound()
     {
-        OnRoundStart.AddListener(RoundStart);
-        OnRoundStart.AddListener(RoundEnd);
+        //TODO: a notification to place the boss
+        if (!bossPlaced) return;
+
+        OnRoundStart?.Invoke();
     }
 
-    private void RoundStart()
+    public void EndRound()
     {
-
-    }
-
-    private void RoundEnd()
-    {
-
+        OnRoundEnd?.Invoke();
     }
 
     public void RoomPurchase()
