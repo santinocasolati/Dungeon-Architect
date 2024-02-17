@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,9 +9,7 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent OnRoundStart, OnRoundEnd;
     public bool bossPlaced { get; private set; }
-    public GameObject bossInstance { get; private set; }
-
-    [SerializeField] private NavMeshSurface walkableSurface;
+    public Transform bossInstance { get; private set; }
 
     private void Awake()
     {
@@ -39,10 +36,10 @@ public class GameManager : MonoBehaviour
 
     public void RoomPurchase()
     {
-        walkableSurface.BuildNavMesh();
+
     }
 
-    public void BossStatus(bool bossPlaced, GameObject bossInstance)
+    public void BossStatus(bool bossPlaced, Transform bossInstance)
     {
         this.bossPlaced = bossPlaced;
         this.bossInstance = bossInstance;

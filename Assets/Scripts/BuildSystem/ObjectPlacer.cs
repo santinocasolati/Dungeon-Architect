@@ -17,7 +17,7 @@ public class ObjectPlacer : MonoBehaviour
 
         if (isBoss)
         {
-            GameManager.instance.BossStatus(true, objectInstance);
+            GameManager.instance.BossStatus(true, objectInstance.transform);
         }
 
         return placedGameObjects.Count - 1;
