@@ -95,6 +95,18 @@ public class RoundManager : MonoBehaviour
             }
 
             ai.StopCurrentPath();
+
+            HealthHandler hh = t.troopInstance.GetComponent<HealthHandler>();
+
+            if (hh == null)
+            {
+                hh = t.troopInstance.GetComponentInChildren<HealthHandler>();
+            }
+
+            if (hh != null)
+            {
+                hh.ResetHealth();
+            }
         });
     }
 }

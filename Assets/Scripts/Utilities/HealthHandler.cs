@@ -36,6 +36,11 @@ public class HealthHandler : MonoBehaviour
         }
     }
 
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
+
     private void Die()
     {
         OnDeath.Invoke();
