@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnRoundStart, OnRoundEnd;
     public bool bossPlaced { get; private set; }
     public Transform bossInstance { get; private set; }
+    public List<GameObject> floors;
 
     private void Awake()
     {
@@ -34,9 +35,9 @@ public class GameManager : MonoBehaviour
         OnRoundEnd?.Invoke();
     }
 
-    public void RoomPurchase()
+    public void RoomPurchase(GameObject floor)
     {
-
+        floors.Add(floor);
     }
 
     public void BossStatus(bool bossPlaced, Transform bossInstance)

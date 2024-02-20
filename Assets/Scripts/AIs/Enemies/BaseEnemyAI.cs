@@ -8,7 +8,7 @@ public class BaseEnemyAI : SimpleChaseAI
     {
         base.Start();
 
-        //finalTarget = GameManager.instance.bossInstance;
+        finalTarget = GameManager.instance.bossInstance;
         enemiesLayer = 1 << LayerMask.NameToLayer("Troops");
     }
 }

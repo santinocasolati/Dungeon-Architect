@@ -14,12 +14,16 @@ public class SimpleChaseAI : MonoBehaviour
     public float attackRange = 2.5f;
     public float attackCooldown = 2f;
     public float avoidanceRadius = 1.0f;
+    public float attackDamage = 10f;
 
     protected bool attackInCooldown = false;
+    protected bool inAttackRange = false;
 
     protected AIDestinationSetter targetSetter;
-    protected AIPath pathSetter;
+    public AIPath pathSetter;
     protected Rigidbody rb;
+
+    public Transform currentTarget;
 
     private void Awake()
     {
@@ -37,10 +41,23 @@ public class SimpleChaseAI : MonoBehaviour
     {
         CheckNearEnemies();
         CheckAttack();
+
+        if (pathSetter.isStopped)
+        {
+            PositionReset pr = GetComponent<PositionReset>();
+
+            if (pr != null)
+            {
+                transform.position = pr.originalPos;
+                transform.rotation = pr.originalRot;
+            }
+        }
     }
 
     private void CheckNearEnemies()
     {
+        if (inAttackRange) return;
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemiesLayer);
 
         Transform nearestEnemy = finalTarget;
@@ -58,15 +75,24 @@ public class SimpleChaseAI : MonoBehaviour
         }
 
         targetSetter.target = nearestEnemy;
+        currentTarget = nearestEnemy;
     }
 
     private void CheckAttack()
     {
-        if (targetSetter.target == null) return;
+        if (targetSetter.target == null)
+        {
+            inAttackRange = false;
+            return;
+        }
 
         if (Vector3.Distance(targetSetter.target.position, transform.position) < attackRange && !attackInCooldown)
         {
+            inAttackRange = true;
             Attack();
+        } else
+        {
+            inAttackRange = false;
         }
     }
 
@@ -74,12 +100,36 @@ public class SimpleChaseAI : MonoBehaviour
     {
         attackInCooldown = true;
 
+        if (currentTarget != null)
+        {
+            HealthHandler hh = currentTarget.gameObject.GetComponent<HealthHandler>();
+
+            if (hh != null)
+            {
+                hh.TakeDamage(attackDamage);
+            }
+        }
+
         Invoke(nameof(ResetAttack), attackCooldown);
     }
 
     private void ResetAttack()
     {
         attackInCooldown = false;
+    }
+
+    public void StopCurrentPath()
+    {
+        targetSetter.target = transform;
+        currentTarget = null;
+        pathSetter.isStopped = true;
+    }
+
+    public void ResetPath()
+    {
+        targetSetter.target = null;
+        currentTarget = null;
+        pathSetter.isStopped = false;
     }
 
     private void OnDrawGizmosSelected()

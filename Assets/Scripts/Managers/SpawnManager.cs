@@ -2,26 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesSpawner : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
+    public static SpawnManager instance;
+
     public Transform enemiesContainer;
     public GameObject[] enemiesPrefab;
 
     [SerializeField] private float yPos;
     [SerializeField] private Grid grid;
 
-    public void SpawnEnemies(int amount, GameObject[] floors)
+    private List<GameObject> aliveEnemies = new List<GameObject>();
+
+    private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(instance);
+        }
+
+        instance = this;
+    }
+
+    public void SpawnEnemies(int amount, List<GameObject> floors)
+    {
+        aliveEnemies.Clear();
+
         for (int i = 0; i < amount; i++)
         {
-            GameObject randomFloor = floors[Random.Range(0, floors.Length)];
+            GameObject randomFloor = floors[Random.Range(0, floors.Count)];
             Collider collider = randomFloor.GetComponent<Collider>();
 
             Vector3 randomPoint = GetRandomPoint(collider);
             Vector3Int gridPos = grid.WorldToCell(randomPoint);
             Vector3 enemyPos = grid.CellToWorld(gridPos);
-            enemyPos.x += .5f;
-            enemyPos.z += .5f;
+            enemyPos.x -= 1;
+            enemyPos.z -= 1;
 
             InstantiateEnemy(enemyPos);
         }
@@ -41,6 +57,28 @@ public class EnemiesSpawner : MonoBehaviour
     {
         GameObject selectedEnemy = enemiesPrefab[Random.Range(0, enemiesPrefab.Length)];
         GameObject spawnedEnemy = Instantiate(selectedEnemy, enemyPos, selectedEnemy.transform.rotation, enemiesContainer);
-        // TODO: Assign the boss reference to the AI
+        aliveEnemies.Add(spawnedEnemy);
+
+        HealthHandler enemyHealth = spawnedEnemy.GetComponent<HealthHandler>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.OnDeath.AddListener(() => OnEnemyDeath(spawnedEnemy));
+        }
+    }
+
+    private void OnEnemyDeath(GameObject enemy)
+    {
+        aliveEnemies.Remove(enemy);
+        Destroy(enemy);
+
+        if (aliveEnemies.Count == 0)
+        {
+            RoundCleared();
+        }
+    }
+
+    private void RoundCleared()
+    {
+        RoundManager.instance.EndRound(true);
     }
 }

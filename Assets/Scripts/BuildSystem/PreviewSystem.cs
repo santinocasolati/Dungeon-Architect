@@ -58,6 +58,13 @@ public class PreviewSystem : MonoBehaviour
         {
             collider.enabled = false;
         }
+
+        Rigidbody[] rbs = previewObject.GetComponentsInChildren<Rigidbody>();
+
+        foreach (Rigidbody rb in rbs)
+        {
+            rb.useGravity = false;
+        }
     }
 
     public void StopShowingPreview()
