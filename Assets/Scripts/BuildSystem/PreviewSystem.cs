@@ -51,6 +51,13 @@ public class PreviewSystem : MonoBehaviour
 
             renderer.materials = materials;
         }
+
+        Collider[] colliders = previewObject.GetComponentsInChildren<Collider>();
+
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false;
+        }
     }
 
     public void StopShowingPreview()
