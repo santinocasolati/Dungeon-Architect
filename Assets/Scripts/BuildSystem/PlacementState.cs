@@ -40,6 +40,8 @@ public class PlacementState : IBuildingState
 
     public void OnAction(Vector3Int gridPos, Vector3 objectPos)
     {
+        if (!CoinsManager.instance.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
+
         bool placementValidity = CheckPlacementValidity(gridPos, selectedObjectIndex);
         if (!placementValidity) return;
 

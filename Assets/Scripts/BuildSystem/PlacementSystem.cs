@@ -50,7 +50,7 @@ public class PlacementSystem : MonoBehaviour
 
         VisualizatorStateSetter(true);
 
-        buildingState = new RemovingState(grid, previewSystem, objectsData, objectPlacer);
+        buildingState = new RemovingState(grid, previewSystem, objectsData, objectPlacer, database);
         inputDetector.OnMousePressed += PlaceStructure;
         inputDetector.OnCancel += StopPlacement;
     }

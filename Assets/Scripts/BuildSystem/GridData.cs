@@ -94,6 +94,11 @@ public class GridData
     {
         return placedObjects[gridPos].IsBoss;
     }
+
+    public int GetPositionId(Vector3Int gridPos)
+    {
+        return placedObjects[gridPos].ID;
+    }
 }
 
 public class PlacementData

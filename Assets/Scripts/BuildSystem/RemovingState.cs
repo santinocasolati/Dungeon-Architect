@@ -10,13 +10,15 @@ public class RemovingState : IBuildingState
     private PreviewSystem previewSystem;
     private GridData objectsData;
     private ObjectPlacer objectPlacer;
+    private ObjectsDatabaseSO database;
 
-    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData objectsData, ObjectPlacer objectPlacer)
+    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData objectsData, ObjectPlacer objectPlacer, ObjectsDatabaseSO database)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.objectsData = objectsData;
         this.objectPlacer = objectPlacer;
+        this.database = database;
 
         previewSystem.StartShowingRemovePreview();
     }
@@ -40,6 +42,16 @@ public class RemovingState : IBuildingState
         gameObjectIndex = selectedData.GetRepresentationIndex(gridPos);
 
         if (gameObjectIndex == -1) return;
+
+        int objectId = selectedData.GetPositionId(gridPos);
+
+        if (!selectedData.GetIfPosHasBoss(gridPos))
+        {
+            int sellPrice = database.objects[objectId].Price;
+            sellPrice = Mathf.FloorToInt(sellPrice * 0.9f);
+            sellPrice = sellPrice == 0 ? 1 : sellPrice;
+            CoinsManager.instance.AddCoins(sellPrice);
+        }
 
         objectPlacer.RemoveObjectAt(gameObjectIndex, selectedData.GetIfPosHasBoss(gridPos));
         selectedData.RemoveObjectAt(gridPos);

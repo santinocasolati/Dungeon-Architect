@@ -18,10 +18,14 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 2, y: 2}
     <Prefab>k__BackingField: {fileID: 1796986147070654013, guid: 8c4d155d9d876c24ab8cd00f570d564d,
       type: 3}
+    <UnlockLevel>k__BackingField: 0
+    <Price>k__BackingField: 0
     <isBoss>k__BackingField: 1
   - <Name>k__BackingField: Troop
     <Id>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 51348965025132666, guid: e08ff7b5219366c48bdc5e828a78195a,
       type: 3}
+    <UnlockLevel>k__BackingField: 0
+    <Price>k__BackingField: 1
     <isBoss>k__BackingField: 0

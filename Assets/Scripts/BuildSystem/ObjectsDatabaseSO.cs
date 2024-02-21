@@ -24,6 +24,12 @@ public class ObjectData
     public GameObject Prefab { get; private set; }
 
     [field: SerializeField]
+    public int UnlockLevel { get; private set; }
+
+    [field: SerializeField]
+    public int Price { get; private set; }
+
+    [field: SerializeField]
     public bool isBoss { get; private set; }
 }
 
