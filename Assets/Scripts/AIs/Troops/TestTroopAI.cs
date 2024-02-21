@@ -7,7 +7,6 @@ public class TestTroopAI : BaseTroopAI
     protected override void Attack()
     {
         base.Attack();
-
-        Debug.Log("Troop Attack");
+        //Debug.Log("Troop Attack");
     }
 }

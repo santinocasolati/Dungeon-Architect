@@ -104,6 +104,16 @@ public class SimpleChaseAI : MonoBehaviour
         {
             HealthHandler hh = currentTarget.gameObject.GetComponent<HealthHandler>();
 
+            if (hh == null)
+            {
+                hh = currentTarget.gameObject.GetComponentInParent<HealthHandler>();
+            }
+
+            if (hh == null)
+            {
+                hh = currentTarget.gameObject.GetComponentInChildren<HealthHandler>();
+            }
+
             if (hh != null)
             {
                 hh.TakeDamage(attackDamage);

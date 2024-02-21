@@ -31,7 +31,9 @@ public class GridData
         {
             for (int y = 0; y < objectSize.y; y++)
             {
-                returnVal.Add(gridPosition + new Vector3Int(x, 0, y));
+                Vector3Int pos = gridPosition + new Vector3Int(x, 0, y);
+                pos.y = 0;
+                returnVal.Add(pos);
             }
         }
 

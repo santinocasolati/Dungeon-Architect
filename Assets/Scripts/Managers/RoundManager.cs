@@ -78,6 +78,7 @@ public class RoundManager : MonoBehaviour
             PositionReset pr = ai.gameObject.GetOrAddComponent<PositionReset>();
 
             pr.originalPos = ai.gameObject.transform.position;
+            pr.parentOriginalPos = ai.transform.parent.position;
             pr.originalRot = ai.gameObject.transform.rotation;
             ai.ResetPath();
         });

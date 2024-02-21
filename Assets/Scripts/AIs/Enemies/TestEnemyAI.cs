@@ -7,7 +7,6 @@ public class TestEnemyAI : BaseEnemyAI
     protected override void Attack()
     {
         base.Attack();
-
-        Debug.Log("Enemy Attack");
+        //Debug.Log("Enemy Attack");
     }
 }

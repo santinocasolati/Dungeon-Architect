@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     public void EndRound()
     {
         OnRoundEnd?.Invoke();
+
+        KilledEnemyManager.instance.StartCleaning();
     }
 
     public void RoomPurchase(GameObject floor)

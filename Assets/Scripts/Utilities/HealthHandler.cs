@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ public class HealthHandler : MonoBehaviour
 {
     public float maxHealth = 100;
     public bool isBoss = false;
+    public bool isEnemy = false;
 
     public UnityEvent OnDeath;
 
@@ -20,6 +22,7 @@ public class HealthHandler : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+
         if (currentHealth <= 0)
         {
             Die();
@@ -45,9 +48,24 @@ public class HealthHandler : MonoBehaviour
     {
         OnDeath?.Invoke();
 
-        if (isBoss)
+        if (!isEnemy)
         {
-            RoundManager.instance.EndRound(false);
+            if (isBoss)
+            {
+                RoundManager.instance.EndRound(false);
+            } else
+            {
+                SimpleChaseAI ai = gameObject.GetComponent<SimpleChaseAI>();
+
+                if (ai == null)
+                {
+                    ai = gameObject.GetComponentInChildren<SimpleChaseAI>();
+                }
+
+                PositionReset pr = ai.gameObject.GetComponent<PositionReset>();
+                KilledEnemyManager.instance.AddKilled(pr.parentOriginalPos);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

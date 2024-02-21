@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  isBoss: 0
+  isEnemy: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -290,4 +292,6 @@ MonoBehaviour:
   attackRange: 2.5
   attackCooldown: 2
   avoidanceRadius: 1
-  attackDamage: 50
+  attackDamage: 1
+  pathSetter: {fileID: 0}
+  currentTarget: {fileID: 0}
