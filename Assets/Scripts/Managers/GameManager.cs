@@ -45,4 +45,9 @@ public class GameManager : MonoBehaviour
         this.bossPlaced = bossPlaced;
         this.bossInstance = bossInstance;
     }
+
+    public void Defeat()
+    {
+        Debug.Log("Defeat");
+    }
 }

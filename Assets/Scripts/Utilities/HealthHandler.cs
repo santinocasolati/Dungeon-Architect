@@ -43,6 +43,11 @@ public class HealthHandler : MonoBehaviour
 
     private void Die()
     {
-        OnDeath.Invoke();
+        OnDeath?.Invoke();
+
+        if (isBoss)
+        {
+            RoundManager.instance.EndRound(false);
+        }
     }
 }
