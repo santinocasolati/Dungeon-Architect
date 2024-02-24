@@ -76,17 +76,23 @@ public class GridData
 
     public int GetRepresentationIndex(Vector3Int gridPos)
     {
-        if (!placedObjects.ContainsKey(gridPos))
+        Vector3Int checkPos = gridPos;
+        checkPos.y = 0;
+
+        if (!placedObjects.ContainsKey(checkPos))
         {
             return -1;
         }
 
-        return placedObjects[gridPos].PlacedObjectIndex;
+        return placedObjects[checkPos].PlacedObjectIndex;
     }
 
     public void RemoveObjectAt(Vector3Int gridPos)
     {
-        foreach (var pos in placedObjects[gridPos].occupiedPositions)
+        Vector3Int removePos = gridPos;
+        removePos.y = 0;
+
+        foreach (var pos in placedObjects[removePos].occupiedPositions)
         {
             placedObjects.Remove(pos);
         }
@@ -94,12 +100,18 @@ public class GridData
 
     public bool GetIfPosHasBoss(Vector3Int gridPos)
     {
-        return placedObjects[gridPos].IsBoss;
+        Vector3Int checkPos = gridPos;
+        checkPos.y = 0;
+
+        return placedObjects[checkPos].IsBoss;
     }
 
     public int GetPositionId(Vector3Int gridPos)
     {
-        return placedObjects[gridPos].ID;
+        Vector3Int checkPos = gridPos;
+        checkPos.y = 0;
+
+        return placedObjects[checkPos].ID;
     }
 }
 

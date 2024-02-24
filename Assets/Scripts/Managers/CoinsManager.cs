@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,9 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] private int maxCoins;
     public int startingCoins = 5;
 
-    public int currentCoins;
+    private int currentCoins;
+
+    public Action<string> coinsModified;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class CoinsManager : MonoBehaviour
     public void SetCoins(int coins)
     {
         currentCoins = coins;
+        coinsModified?.Invoke(currentCoins.ToString("D3"));
     }
 
     public void AddCoins(int coins)
@@ -39,6 +43,8 @@ public class CoinsManager : MonoBehaviour
         {
             currentCoins = maxCoins;
         }
+
+        coinsModified?.Invoke(currentCoins.ToString("D3"));
     }
 
     public bool RemoveCoins(int coins)
@@ -50,6 +56,7 @@ public class CoinsManager : MonoBehaviour
         }
 
         currentCoins -= coins;
+        coinsModified?.Invoke(currentCoins.ToString("D3"));
         return true;
     }
 }
