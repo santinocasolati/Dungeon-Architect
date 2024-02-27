@@ -16,8 +16,8 @@ public class RoundManager : MonoBehaviour
 
     public List<TroopStore> placedTroops = new();
 
-    private int currentRound = 1;
-    private int currentEnemyAmount;
+    [SerializeField] private int currentRound = 1;
+    private int currentEnemyAmount = 1;
 
     private bool roundStarted = false;
 
@@ -66,6 +66,7 @@ public class RoundManager : MonoBehaviour
         }
 
         ResetOriginalPositions();
+        SpawnManager.instance.DespawnEnemies();
         GameManager.instance.EndRound();
         currentRound++;
         roundStarted = false;

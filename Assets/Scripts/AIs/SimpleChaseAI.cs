@@ -98,8 +98,6 @@ public class SimpleChaseAI : MonoBehaviour
 
     protected virtual void Attack()
     {
-        attackInCooldown = true;
-
         if (currentTarget != null)
         {
             HealthHandler hh = currentTarget.gameObject.GetComponent<HealthHandler>();
@@ -116,11 +114,11 @@ public class SimpleChaseAI : MonoBehaviour
 
             if (hh != null)
             {
+                attackInCooldown = true;
                 hh.TakeDamage(attackDamage);
+                Invoke(nameof(ResetAttack), attackCooldown);
             }
         }
-
-        Invoke(nameof(ResetAttack), attackCooldown);
     }
 
     private void ResetAttack()

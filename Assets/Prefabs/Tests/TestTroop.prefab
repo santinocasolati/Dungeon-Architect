@@ -292,6 +292,6 @@ MonoBehaviour:
   attackRange: 2.5
   attackCooldown: 2
   avoidanceRadius: 1
-  attackDamage: 1
+  attackDamage: 50
   pathSetter: {fileID: 0}
   currentTarget: {fileID: 0}

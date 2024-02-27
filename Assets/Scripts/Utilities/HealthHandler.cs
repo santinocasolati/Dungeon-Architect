@@ -14,7 +14,7 @@ public class HealthHandler : MonoBehaviour
 
     private float currentHealth;
 
-    private void Start()
+    private void Awake()
     {
         currentHealth = maxHealth;
     }
@@ -63,7 +63,7 @@ public class HealthHandler : MonoBehaviour
                 }
 
                 PositionReset pr = ai.gameObject.GetComponent<PositionReset>();
-                KilledEnemyManager.instance.AddKilled(pr.parentOriginalPos);
+                KilledTroopsManager.instance.AddKilled(pr.parentOriginalPos);
                 gameObject.SetActive(false);
             }
         }

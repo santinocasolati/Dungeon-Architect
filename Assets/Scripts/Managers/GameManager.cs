@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         DungeonHPManager.instance.ResetManager();
         DungeonLevelManager.instance.ResetManager();
         CoinsManager.instance.ResetManager();
-        KilledEnemyManager.instance.ResetManager();
+        KilledTroopsManager.instance.ResetManager();
     }
 
     public void StartRound()
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         OnRoundEnd?.Invoke();
 
-        KilledEnemyManager.instance.StartCleaning();
+        KilledTroopsManager.instance.StartCleaning();
     }
 
     public void RoomPurchase(GameObject floor)

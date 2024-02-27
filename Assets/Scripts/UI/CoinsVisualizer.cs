@@ -10,6 +10,7 @@ public class CoinsVisualizer : MonoBehaviour
 
     private void Start()
     {
+        UpdateCoinsString(CoinsManager.instance.GetCoins().ToString("D3"));
         CoinsManager.instance.coinsModified += UpdateCoinsString;
     }
 

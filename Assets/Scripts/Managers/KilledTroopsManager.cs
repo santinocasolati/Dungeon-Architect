@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KilledEnemyManager : MonoBehaviour
+public class KilledTroopsManager : MonoBehaviour
 {
-    public static KilledEnemyManager instance;
+    public static KilledTroopsManager instance;
 
     [SerializeField] private ObjectPlacer objectPlacer;
 

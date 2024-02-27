@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager instance;
 
     public Transform enemiesContainer;
-    public GameObject[] enemiesPrefab;
+    public EnemiesDatabaseSO enemiesDatabase;
 
     [SerializeField] private float yPos;
     [SerializeField] private Grid grid;
@@ -44,6 +44,8 @@ public class SpawnManager : MonoBehaviour
             enemyPos.x -= 1;
             enemyPos.z -= 1;
 
+            //TODO: check if can be spawned there
+
             InstantiateEnemy(enemyPos);
         }
     }
@@ -60,21 +62,22 @@ public class SpawnManager : MonoBehaviour
 
     private void InstantiateEnemy(Vector3 enemyPos)
     {
-        GameObject selectedEnemy = enemiesPrefab[Random.Range(0, enemiesPrefab.Length)];
-        GameObject spawnedEnemy = Instantiate(selectedEnemy, enemyPos, selectedEnemy.transform.rotation, enemiesContainer);
+        EnemyData selectedEnemy = enemiesDatabase.enemies[Random.Range(0, enemiesDatabase.enemies.Count)];
+        GameObject spawnedEnemy = Instantiate(selectedEnemy.Prefab, enemyPos, selectedEnemy.Prefab.transform.rotation, enemiesContainer);
         aliveEnemies.Add(spawnedEnemy);
 
         HealthHandler enemyHealth = spawnedEnemy.GetComponent<HealthHandler>();
         if (enemyHealth != null)
         {
-            enemyHealth.OnDeath.AddListener(() => OnEnemyDeath(spawnedEnemy));
+            enemyHealth.OnDeath.AddListener(() => OnEnemyDeath(spawnedEnemy, selectedEnemy.Reward));
         }
     }
 
-    private void OnEnemyDeath(GameObject enemy)
+    private void OnEnemyDeath(GameObject enemy, int reward)
     {
         aliveEnemies.Remove(enemy);
         Destroy(enemy);
+        CoinsManager.instance.AddCoins(reward);
 
         if (aliveEnemies.Count == 0)
         {
@@ -85,5 +88,15 @@ public class SpawnManager : MonoBehaviour
     private void RoundCleared()
     {
         RoundManager.instance.EndRound(true);
+    }
+
+    public void DespawnEnemies()
+    {
+        aliveEnemies.ForEach(enemy =>
+        {
+            Destroy(enemy);
+        });
+
+        aliveEnemies.Clear();
     }
 }

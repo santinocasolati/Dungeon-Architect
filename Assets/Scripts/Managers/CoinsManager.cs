@@ -40,6 +40,8 @@ public class CoinsManager : MonoBehaviour
         coinsModified?.Invoke(currentCoins.ToString("D3"));
     }
 
+    public int GetCoins() => currentCoins;
+
     public void AddCoins(int coins)
     {
         currentCoins += coins;

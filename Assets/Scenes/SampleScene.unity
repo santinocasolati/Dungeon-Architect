@@ -420,6 +420,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   placedTroops: []
+  currentRound: 1
 --- !u!1 &191917567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,7 +1785,7 @@ GameObject:
   - component: {fileID: 896102838}
   - component: {fileID: 896102839}
   m_Layer: 0
-  m_Name: KilledEnemyManager
+  m_Name: KilledTroopsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1814,7 +1815,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 896102837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf5a64ccdf58574a8fba6cc2a14620d, type: 3}
+  m_Script: {fileID: 11500000, guid: 837b37071b0d0a94eb5b3f779d56e0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectPlacer: {fileID: 693244039}
@@ -1906,12 +1907,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACon+sIIAR+VQIAABUFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMtyozAQ/BWXzpsUJnHKu7dd4jh7SOyKN5ULF4EGo7KQKD38LP/7jgQY7JyMu3tmeh5wIlyaGnKr9Fxz9qYYkF8j4p/Jj1FPvsKerpVc8SN0mi/ObOlFNGg+qOUK8bEPM6oCq3n+W66FF0cIOskLpasZW0OijDUIF1QYQEor66MlQqcR2bcBh/b36H9HZ3zKQVrQ31V30X00vlI6mQta1cC84z5gHHUh+BSEErtpNdH9xNdQQnDTmiH2UIdmE1obh62ggHGKzQUbvmYJfF1a/BMPgxdFYcC2FjU9PHONM2qykj+qGVxFzabxtqXC+TrjeBpcNUnfvvFPj4EutKpeu7pNT7bk+eaDHnJq7GCyQ/j52riTOyo2NBPwVYJ8V3OtnGRIWu18qDMQPw9SXXpLSsg3va7xegO6+vuWBhs6h+73ieBVFib/2AArocK8f/oY0Libv2g43IZpMyHqTXwa+EfXwyNqiReujUWqLSi9u0w57aVkFmbmm3E2UVpCgFvPNUgq7GGJaeztCm+4Qdkb5oX616Ut3nLdW3ATEuBeH0U31FLtLssypdq9gSkXzgouoTftiXecU6KkbC5sOJMubOV0QfNB2Npxdn1aZErZGLIifoijYhI9ZHcTOn7I4qfpJC5YEWVTEm6PS+yTimVjtB0Pbk32ySXeWfcVGc01rcO1M013c36s1GDkXBZqlWsAuWgyXIyDxiL4XrIZ4zigFVjLZdg3OaVEqHwDLL0kSkOns73VNO2zpKTmW2U9kpIkfDtS4uHLKS81bDnsfPEu2Zmc/wNQSwMEFAAACAgAAKif62sFzR1tAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJJFYophalKakbGRQZqpgXGSrmmioXGSkZmFqVFaSppBkoVSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAKif6wggBH5VAgAAFQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAKif62sFzR1tAAAAeAAAAAkAJAAAAAAAAAAAAAAAogIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABaAwAAAAA=
+    dataString: UEsDBBQAAAgIAACon+tO/n/nVAIAABcFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMty4jAQ/BVK503KmJBi97ZrCNkDCRU2lYsvsjXGKmTJpUd4Ff++I9mAMSdMd89Mz8M+Ei5NDblVeq45WygG5NeA+GfyY3AlX2FH10qu+AHOmi/ObOlFNGg+qOUK8aEPM6oCq3n+W66FF0cIOskLpasZW0OijDUIF1QYQEor66MlQscB2bUB+/b34H8HJ3zKQVrQ96qH6DEa3iidzAWtamDe8TVgGJ1D8CkIJXbTaqLHsa+hhOCmNUPsvg7NJrQ2DltBAeMUmws2fM0S+Lq0+CfuBr8XhQHbWtR0P+UaZ9RkJX9UM7iKmk3j7ZsK5+sM40lw1SRd3PHPT4EutKpez3WbnmzJ880H3efU2M5ku/D01riTWyo2NBPwVYJ8U3OtnGRIWu18qDMQTzupLr0lJeSbq67x2gNdfb+lzoZOoftdIniVhck/NcBKqDDvnz4GNO7mLxoOt2HaTIh6E58G/tF194ha4oVrY5FqC0rvLlNOeymZhZn5ZpxNlJYQ4NZzDZIKu19iGttfYY/rlO0xL9S/Lm3xlju/Bb2QAF/1UdSjlmp7WZYp1XYBpnx3VnDZTeaZNxxUoqRsTsz0WB+3crqgeTdu7Ti7PS4yoWwIWRGP4qgYR6PsYUyHoyx+nozjghVRNiHh+rjETqlYNlbbAeHe5HWUEi/t/B0ZzDWtw70zTbdzfqhUZ+hcFmqVawD53mS4OAeNRfDNZDPGcUQrsJbLsHFyTIlQ+QZYekmUhlZnO6tpes2Skpp/K+uRlCTh65ESD1+Oeanhm8PWFz8nO5HTf1BLAwQUAAAICAAAqJ/rawXNHW0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0kkViimFqUpqRsZFBmqmBcZKuaaKhcZKRmYWpUVpKmkGShVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAqJ/rTv5/51QCAAAXBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAqJ/rawXNHW0AAAB4AAAACQAkAAAAAAAAAAAAAAChAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAFkDAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -2131,8 +2132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesContainer: {fileID: 547435427}
-  enemiesPrefab:
-  - {fileID: 1598069070547527076, guid: d810ee45726551347ab1b5c9dd307a70, type: 3}
+  enemiesDatabase: {fileID: 11400000, guid: b1b31f3f02621be42b727e3319dd9b3c, type: 2}
   yPos: 1
   grid: {fileID: 1961964104}
 --- !u!1 &1131659699
@@ -2203,9 +2203,9 @@ Canvas:
   m_GameObject: {fileID: 1131659699}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 330585545}
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
