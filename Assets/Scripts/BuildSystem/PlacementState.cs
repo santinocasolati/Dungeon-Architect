@@ -54,7 +54,7 @@ public class PlacementState : IBuildingState
     {
         if (database.objects[selectedObjectIndex].isBoss)
         {
-            return (objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid) && !GameManager.instance.bossPlaced);
+            return (objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid) && !GameManager.instance.BossPlaced);
         }
         else
         {

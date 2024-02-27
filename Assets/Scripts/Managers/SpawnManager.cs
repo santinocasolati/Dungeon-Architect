@@ -24,6 +24,11 @@ public class SpawnManager : MonoBehaviour
         instance = this;
     }
 
+    public void ResetManager()
+    {
+        aliveEnemies.Clear();
+    }
+
     public void SpawnEnemies(int amount, List<GameObject> floors)
     {
         aliveEnemies.Clear();

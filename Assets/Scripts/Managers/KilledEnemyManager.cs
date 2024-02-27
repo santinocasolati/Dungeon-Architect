@@ -22,6 +22,11 @@ public class KilledEnemyManager : MonoBehaviour
         instance = this;
     }
 
+    public void ResetManager()
+    {
+        troopsToRemove.Clear();
+    }
+
     public void AssignGridData(GridData data)
     {
         objectsData = data;

@@ -7,6 +7,8 @@ public class DungeonLevelManager : MonoBehaviour
     public static DungeonLevelManager instance;
 
     [SerializeField] private int maxLevel = 10;
+    [SerializeField] private List<GameObject> roomsPerLevel;
+
     private int currentLevel = 1;
 
     private void Awake()
@@ -19,11 +21,16 @@ public class DungeonLevelManager : MonoBehaviour
         instance = this;
     }
 
+    public void ResetManager()
+    {
+        currentLevel = 1;
+    }
+
     public void LevelUp()
     {
         if (currentLevel == maxLevel) return;
         currentLevel++;
 
-        // TODO: Allow to buy one expansion room
+        roomsPerLevel[currentLevel - 1].SetActive(true);
     }
 }

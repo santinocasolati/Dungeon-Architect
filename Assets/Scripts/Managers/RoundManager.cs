@@ -33,6 +33,13 @@ public class RoundManager : MonoBehaviour
 
     private void Start()
     {
+        ResetManager();
+    }
+
+    public void ResetManager()
+    {
+        roundStarted = false;
+        currentRound = 1;
         currentEnemyAmount = initialEnemyAmount;
     }
 

@@ -26,6 +26,11 @@ public class CoinsManager : MonoBehaviour
 
     private void Start()
     {
+        ResetManager();
+    }
+
+    public void ResetManager()
+    {
         SetCoins(startingCoins);
     }
 

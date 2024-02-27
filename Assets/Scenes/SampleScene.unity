@@ -802,7 +802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &389337154
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -902,6 +902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7eb211846118242b655edb14682311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStartingRoom: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,6 +1661,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  originalFloors: []
   floors:
   - {fileID: 1479775463}
   - {fileID: 389337152}
@@ -2359,6 +2361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLevel: 10
+  roomsPerLevel:
+  - {fileID: 389337152}
 --- !u!1001 &1384299461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2668,6 +2672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7eb211846118242b655edb14682311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStartingRoom: 1
 --- !u!1 &1506608801
 GameObject:
   m_ObjectHideFlags: 0

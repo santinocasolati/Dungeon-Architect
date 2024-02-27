@@ -22,6 +22,11 @@ public class DungeonHPManager : MonoBehaviour
 
     private void Start()
     {
+        ResetManager();
+    }
+
+    public void ResetManager()
+    {
         currentHp = maxHp;
     }
 
