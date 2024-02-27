@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Transform BossInstance { get; private set; }
     [SerializeField] private List<GameObject> originalFloors;
 
-    public List<GameObject> floors;
+    public List<GameObject> Floors { get; private set; }
 
     private void Awake()
     {
@@ -22,7 +22,11 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        Floors = new();
+    }
 
+    private void Start()
+    {
         ResetGame();
     }
 
@@ -33,7 +37,7 @@ public class GameManager : MonoBehaviour
 
         originalFloors.ForEach(floor =>
         {
-            floors.Add(floor);
+            Floors.Add(floor);
         });
 
         RoundManager.instance.ResetManager();
@@ -61,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void RoomPurchase(GameObject floor)
     {
-        floors.Add(floor);
+        Floors.Add(floor);
     }
 
     public void BossStatus(bool bossPlaced, Transform bossInstance)

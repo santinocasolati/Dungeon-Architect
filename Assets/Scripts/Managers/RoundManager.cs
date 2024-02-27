@@ -48,7 +48,7 @@ public class RoundManager : MonoBehaviour
         if (roundStarted) return;
         roundStarted = true;
         SetOriginalPositions();
-        SpawnManager.instance.SpawnEnemies(currentEnemyAmount, GameManager.instance.floors);
+        SpawnManager.instance.SpawnEnemies(currentEnemyAmount, GameManager.instance.Floors);
     }
 
     public void EndRound(bool win)

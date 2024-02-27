@@ -665,7 +665,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 30
   field of view: 20
   orthographic: 0
   orthographic size: 10
@@ -1183,7 +1183,7 @@ MonoBehaviour:
     FieldOfView: 20
     OrthographicSize: 10
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 30
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -1661,10 +1661,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  originalFloors: []
-  floors:
+  originalFloors:
   - {fileID: 1479775463}
-  - {fileID: 389337152}
 --- !u!4 &754073397
 Transform:
   m_ObjectHideFlags: 0
