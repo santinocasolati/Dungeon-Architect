@@ -26,7 +26,6 @@ public class CoinsManager : MonoBehaviour
     private void Start()
     {
         ResetManager();
-        PayWithNegatives(startingCoins * 2);
     }
 
     public void ResetManager()

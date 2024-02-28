@@ -64,6 +64,9 @@ public class RoundManager : MonoBehaviour
             onRoundLost?.Invoke();
         }
 
+        CoinsManager.instance.AddCoins(currentCoinsAmount);
+        currentRound++;
+
         if (currentRound % roundsToIncrement == 0)
         {
             currentEnemyAmount += enemyAmountIncrement;
@@ -73,7 +76,6 @@ public class RoundManager : MonoBehaviour
         ResetOriginalPositions();
         SpawnManager.instance.DespawnEnemies();
         GameManager.instance.EndRound();
-        currentRound++;
         roundStarted = false;
     }
 
