@@ -11,13 +11,16 @@ public class RoundManager : MonoBehaviour
     public int initialEnemyAmount = 1;
     public int enemyAmountIncrement = 1;
     public int roundsToIncrement = 5;
+    public int baseCoinsPerRound = 100;
+    public int coinsToIncrement = 10;
 
     public UnityEvent onRoundLost;
 
     public List<TroopStore> placedTroops = new();
 
     [SerializeField] private int currentRound = 1;
-    private int currentEnemyAmount = 1;
+    private int currentEnemyAmount;
+    private int currentCoinsAmount;
 
     private bool roundStarted = false;
 
@@ -41,6 +44,7 @@ public class RoundManager : MonoBehaviour
         roundStarted = false;
         currentRound = 1;
         currentEnemyAmount = initialEnemyAmount;
+        currentCoinsAmount = baseCoinsPerRound;
     }
 
     public void StartRound()
@@ -63,6 +67,7 @@ public class RoundManager : MonoBehaviour
         if (currentRound % roundsToIncrement == 0)
         {
             currentEnemyAmount += enemyAmountIncrement;
+            currentCoinsAmount += coinsToIncrement;
         }
 
         ResetOriginalPositions();
