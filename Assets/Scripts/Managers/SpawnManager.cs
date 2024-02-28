@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private float yPos;
     [SerializeField] private Grid grid;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask enemiesLayer;
 
     private List<GameObject> aliveEnemies = new List<GameObject>();
 
@@ -38,16 +42,52 @@ public class SpawnManager : MonoBehaviour
             GameObject randomFloor = floors[Random.Range(0, floors.Count)];
             Collider collider = randomFloor.GetComponent<Collider>();
 
-            Vector3 randomPoint = GetRandomPoint(collider);
-            Vector3Int gridPos = grid.WorldToCell(randomPoint);
-            Vector3 enemyPos = grid.CellToWorld(gridPos);
-            enemyPos.x -= 1;
-            enemyPos.z -= 1;
+            EnemyData selectedEnemy = enemiesDatabase.enemies[Random.Range(0, enemiesDatabase.enemies.Count)];
 
-            //TODO: check if can be spawned there
+            bool positionValid = false;
+            Vector3 enemyPos = Vector3.zero;
 
-            InstantiateEnemy(enemyPos);
+            while (!positionValid)
+            {
+                Vector3 randomPoint = GetRandomPoint(collider);
+                Vector3Int gridPos = grid.WorldToCell(randomPoint);
+                enemyPos = grid.CellToWorld(gridPos);
+                enemyPos.x += .5f;
+                enemyPos.z += .5f;
+
+                positionValid = IsPositionValid(enemyPos, selectedEnemy.Size);
+            }
+
+            InstantiateEnemy(enemyPos, selectedEnemy);
         }
+    }
+
+    Vector3 gPos = Vector3.zero;
+
+    private bool IsPositionValid(Vector3 position, Vector2Int enemySize)
+    {
+        for (int x = 0; x < enemySize.x; x++)
+        {
+            for (int y = 0; y < enemySize.y; y++)
+            {
+                Vector3 checkPosition = new Vector3(position.x + x, 0, position.z + y);
+                gPos = checkPosition;
+                Collider[] enemies = Physics.OverlapSphere(checkPosition, 0.5f, enemiesLayer);
+
+                if (enemies.Length > 0) return false;
+
+                Collider[] ground = Physics.OverlapSphere(checkPosition, 0.5f, groundLayer);
+
+                if (ground.Length == 0) return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(gPos, 0.5f);
     }
 
     private Vector3 GetRandomPoint(Collider collider)
@@ -60,9 +100,8 @@ public class SpawnManager : MonoBehaviour
         return randomPoint;
     }
 
-    private void InstantiateEnemy(Vector3 enemyPos)
+    private void InstantiateEnemy(Vector3 enemyPos, EnemyData selectedEnemy)
     {
-        EnemyData selectedEnemy = enemiesDatabase.enemies[Random.Range(0, enemiesDatabase.enemies.Count)];
         GameObject spawnedEnemy = Instantiate(selectedEnemy.Prefab, enemyPos, selectedEnemy.Prefab.transform.rotation, enemiesContainer);
         aliveEnemies.Add(spawnedEnemy);
 
