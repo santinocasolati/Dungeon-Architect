@@ -52,7 +52,6 @@ public class CoinsManager : MonoBehaviour
     {
         if (currentCoins - coins < 0)
         {
-            // TODO: Error Feedback
             return false;
         }
 

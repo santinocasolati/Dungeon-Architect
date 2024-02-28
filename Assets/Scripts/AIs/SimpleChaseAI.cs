@@ -2,6 +2,7 @@ using Pathfinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(AIPath))]
@@ -15,6 +16,7 @@ public class SimpleChaseAI : MonoBehaviour
     public float attackCooldown = 2f;
     public float avoidanceRadius = 1.0f;
     public float attackDamage = 10f;
+    public int precisionRate = 75;
 
     protected bool attackInCooldown = false;
     protected bool inAttackRange = false;
@@ -115,10 +117,22 @@ public class SimpleChaseAI : MonoBehaviour
             if (hh != null)
             {
                 attackInCooldown = true;
-                hh.TakeDamage(attackDamage);
+
+                if (IsAttackSuccessfull())
+                {
+                    hh.TakeDamage(attackDamage);
+                }
+                
                 Invoke(nameof(ResetAttack), attackCooldown);
             }
         }
+    }
+
+    private bool IsAttackSuccessfull()
+    {
+        int randomValue = UnityEngine.Random.Range(0, 101);
+
+        return randomValue <= precisionRate;
     }
 
     private void ResetAttack()

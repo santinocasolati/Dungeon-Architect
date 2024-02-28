@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
 
     public void StartRound()
     {
-        //TODO: a notification to place the boss
         if (!BossPlaced) return;
 
         OnRoundStart?.Invoke();
