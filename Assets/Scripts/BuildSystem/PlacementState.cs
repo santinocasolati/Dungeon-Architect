@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,7 +44,8 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPos, selectedObjectIndex);
         if (!placementValidity) return;
 
-        if (!CoinsManager.instance.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
+        
+        if (!database.objects[selectedObjectIndex].isBoss && !CoinsManager.instance.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
 
         int index = objectPlacer.PlaceObject(database.objects[selectedObjectIndex].Prefab, objectPos, database.objects[selectedObjectIndex].isBoss);
 

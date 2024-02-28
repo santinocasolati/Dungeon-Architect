@@ -17,4 +17,4 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1598069070547527076, guid: d810ee45726551347ab1b5c9dd307a70,
       type: 3}
-    <Reward>k__BackingField: 1
+    <Reward>k__BackingField: 100

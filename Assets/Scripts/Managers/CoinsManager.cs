@@ -7,7 +7,6 @@ public class CoinsManager : MonoBehaviour
 {
     public static CoinsManager instance;
 
-    [SerializeField] private int maxCoins;
     public int startingCoins = 5;
 
     private int currentCoins;
@@ -27,6 +26,7 @@ public class CoinsManager : MonoBehaviour
     private void Start()
     {
         ResetManager();
+        PayWithNegatives(startingCoins * 2);
     }
 
     public void ResetManager()
@@ -37,7 +37,7 @@ public class CoinsManager : MonoBehaviour
     public void SetCoins(int coins)
     {
         currentCoins = coins;
-        coinsModified?.Invoke(currentCoins.ToString("D3"));
+        coinsModified?.Invoke(currentCoins.ToString());
     }
 
     public int GetCoins() => currentCoins;
@@ -45,13 +45,7 @@ public class CoinsManager : MonoBehaviour
     public void AddCoins(int coins)
     {
         currentCoins += coins;
-
-        if (currentCoins > maxCoins)
-        {
-            currentCoins = maxCoins;
-        }
-
-        coinsModified?.Invoke(currentCoins.ToString("D3"));
+        coinsModified?.Invoke(currentCoins.ToString());
     }
 
     public bool RemoveCoins(int coins)
@@ -63,7 +57,13 @@ public class CoinsManager : MonoBehaviour
         }
 
         currentCoins -= coins;
-        coinsModified?.Invoke(currentCoins.ToString("D3"));
+        coinsModified?.Invoke(currentCoins.ToString());
         return true;
+    }
+
+    public void PayWithNegatives(int coins)
+    {
+        currentCoins -= coins;
+        coinsModified?.Invoke(currentCoins.ToString());
     }
 }

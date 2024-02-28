@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlacableObjectsDatabase", menuName = "BuildingSystem/Placeable Objects Database")]
+[CreateAssetMenu(fileName = "PlacableObjectsDatabase", menuName = "Database/Placeable Objects Database")]
 public class ObjectsDatabaseSO : ScriptableObject
 {
     public List<ObjectData> objects;

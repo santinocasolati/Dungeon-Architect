@@ -280,7 +280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1532,6 +1532,7 @@ Transform:
   - {fileID: 1327321469}
   - {fileID: 844818926}
   - {fileID: 896102838}
+  - {fileID: 1573720124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &693244038
@@ -1772,8 +1773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb9c867b3b660b4fb1d01f6b37e8439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCoins: 999
-  startingCoins: 5
+  maxCoins: 99999
+  startingCoins: 1000
 --- !u!1 &896102837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,6 +2756,51 @@ Transform:
   - {fileID: 389337156}
   m_Father: {fileID: 207580633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1573720123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1573720124}
+  - component: {fileID: 1573720125}
+  m_Layer: 0
+  m_Name: LoansManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1573720124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573720123}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 636527563}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1573720125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573720123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 658380c7dbed01643a9009d3fea48e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loansDatabase: {fileID: 11400000, guid: 457186c3d8551534c97f9e7f746c8d8e, type: 2}
 --- !u!1001 &1770616968
 PrefabInstance:
   m_ObjectHideFlags: 0

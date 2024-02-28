@@ -27,5 +27,5 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 51348965025132666, guid: e08ff7b5219366c48bdc5e828a78195a,
       type: 3}
     <UnlockLevel>k__BackingField: 0
-    <Price>k__BackingField: 1
+    <Price>k__BackingField: 5
     <isBoss>k__BackingField: 0
