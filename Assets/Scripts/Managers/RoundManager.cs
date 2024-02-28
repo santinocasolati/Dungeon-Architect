@@ -32,6 +32,7 @@ public class RoundManager : MonoBehaviour
         }
 
         instance = this;
+        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
     }
 
     private void Start()

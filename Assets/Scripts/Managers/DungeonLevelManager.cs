@@ -19,6 +19,7 @@ public class DungeonLevelManager : MonoBehaviour
         }
 
         instance = this;
+        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
     }
 
     public void ResetManager()

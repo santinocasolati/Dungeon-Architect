@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
+
         Floors = new();
     }
 

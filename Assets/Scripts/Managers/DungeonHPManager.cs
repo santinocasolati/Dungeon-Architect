@@ -18,6 +18,7 @@ public class DungeonHPManager : MonoBehaviour
         }
 
         instance = this;
+        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
     }
 
     private void Start()
