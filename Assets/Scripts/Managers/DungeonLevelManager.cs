@@ -11,7 +11,7 @@ public class DungeonLevelManager : MonoBehaviour
 
     private int currentLevel = 1;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (instance != null)
         {

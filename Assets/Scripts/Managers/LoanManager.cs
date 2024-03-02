@@ -12,7 +12,7 @@ public class LoanManager : MonoBehaviour
     private List<int> loansUsed;
     private List<ActiveLoan> loansActive;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (instance != null)
         {

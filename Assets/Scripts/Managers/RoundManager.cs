@@ -24,7 +24,7 @@ public class RoundManager : MonoBehaviour
 
     private bool roundStarted = false;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (instance != null)
         {
@@ -33,10 +33,7 @@ public class RoundManager : MonoBehaviour
 
         instance = this;
         UtilitiesFunctions.instance.ManagerSingleton(gameObject);
-    }
 
-    private void Start()
-    {
         ResetManager();
     }
 

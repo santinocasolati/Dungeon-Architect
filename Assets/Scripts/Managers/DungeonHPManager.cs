@@ -10,7 +10,7 @@ public class DungeonHPManager : MonoBehaviour
 
     private int currentHp;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (instance != null)
         {
@@ -19,10 +19,7 @@ public class DungeonHPManager : MonoBehaviour
 
         instance = this;
         UtilitiesFunctions.instance.ManagerSingleton(gameObject);
-    }
 
-    private void Start()
-    {
         ResetManager();
     }
 

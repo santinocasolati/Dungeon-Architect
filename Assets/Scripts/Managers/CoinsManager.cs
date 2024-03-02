@@ -13,7 +13,7 @@ public class CoinsManager : MonoBehaviour
 
     public Action<string> coinsModified;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (instance != null)
         {
@@ -22,10 +22,7 @@ public class CoinsManager : MonoBehaviour
 
         instance = this;
         UtilitiesFunctions.instance.ManagerSingleton(gameObject);
-    }
 
-    private void Start()
-    {
         ResetManager();
     }
 

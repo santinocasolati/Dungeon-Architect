@@ -153,10 +153,4 @@ public class SimpleChaseAI : MonoBehaviour
         currentTarget = null;
         pathSetter.isStopped = false;
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-    }
 }

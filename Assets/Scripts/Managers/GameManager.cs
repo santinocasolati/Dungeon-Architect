@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> Floors { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         if (instance != null)
         {
@@ -25,10 +25,7 @@ public class GameManager : MonoBehaviour
         UtilitiesFunctions.instance.ManagerSingleton(gameObject);
 
         Floors = new();
-    }
 
-    private void Start()
-    {
         ResetGame();
     }
 

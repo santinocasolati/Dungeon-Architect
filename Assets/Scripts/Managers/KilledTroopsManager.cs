@@ -12,7 +12,7 @@ public class KilledTroopsManager : MonoBehaviour
 
     private List<Vector3> troopsToRemove = new();
 
-    private void Awake()
+    private void OnEnable()
     {
         if (instance != null)
         {

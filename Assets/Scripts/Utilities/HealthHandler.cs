@@ -9,10 +9,9 @@ public class HealthHandler : MonoBehaviour
     public float maxHealth = 100;
     public bool isBoss = false;
     public bool isEnemy = false;
+    public float currentHealth;
 
     public UnityEvent OnDeath;
-
-    private float currentHealth;
 
     private void Awake()
     {

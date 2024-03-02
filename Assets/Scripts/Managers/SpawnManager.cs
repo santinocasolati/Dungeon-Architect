@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
 
     private List<GameObject> aliveEnemies = new List<GameObject>();
 
-    private void Awake()
+    private void OnEnable()
     {
         if (instance != null)
         {
@@ -26,6 +26,7 @@ public class SpawnManager : MonoBehaviour
         }
 
         instance = this;
+
         UtilitiesFunctions.instance.ManagerSingleton(gameObject);
     }
 
@@ -63,8 +64,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    Vector3 gPos = Vector3.zero;
-
     private bool IsPositionValid(Vector3 position, Vector2Int enemySize)
     {
         for (int x = 0; x < enemySize.x; x++)
@@ -72,7 +71,6 @@ public class SpawnManager : MonoBehaviour
             for (int y = 0; y < enemySize.y; y++)
             {
                 Vector3 checkPosition = new Vector3(position.x + x, 0, position.z + y);
-                gPos = checkPosition;
                 Collider[] enemies = Physics.OverlapSphere(checkPosition, 0.5f, enemiesLayer);
 
                 if (enemies.Length > 0) return false;
@@ -84,11 +82,6 @@ public class SpawnManager : MonoBehaviour
         }
 
         return true;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(gPos, 0.5f);
     }
 
     private Vector3 GetRandomPoint(Collider collider)
