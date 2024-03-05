@@ -10,13 +10,13 @@ public class ObjectPlacer : MonoBehaviour
 
     private List<GameObject> placedGameObjects = new();
 
-    public int PlaceObject(GameObject prefab, Vector3 objectPos, bool isBoss)
+    public int PlaceObject(GameObject prefab, Vector3 objectPos, ObjectType objectType)
     {
         GameObject objectInstance = Instantiate(prefab, placeContainer);
         objectInstance.transform.position = objectPos;
         placedGameObjects.Add(objectInstance);
 
-        if (isBoss)
+        if (objectType == ObjectType.Boss)
         {
             GameManager.instance.BossStatus(true, objectInstance.transform);
         } else

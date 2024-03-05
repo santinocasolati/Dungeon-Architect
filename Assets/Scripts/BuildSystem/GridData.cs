@@ -8,10 +8,10 @@ public class GridData
 {
     public Dictionary<Vector3Int, PlacementData> placedObjects = new();
 
-    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int id, int placedObjectIndex, bool isBoss)
+    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int id, int placedObjectIndex, ObjectType objectType)
     {
         List<Vector3Int> positionsToOccupy = CalculatePositions(gridPosition, objectSize);
-        PlacementData data = new PlacementData(positionsToOccupy, id, placedObjectIndex, isBoss);
+        PlacementData data = new PlacementData(positionsToOccupy, id, placedObjectIndex, objectType);
 
         foreach (var pos in positionsToOccupy)
         {
@@ -103,7 +103,7 @@ public class GridData
         Vector3Int checkPos = gridPos;
         checkPos.y = 0;
 
-        return placedObjects[checkPos].IsBoss;
+        return placedObjects[checkPos].Type == ObjectType.Boss;
     }
 
     public int GetPositionId(Vector3Int gridPos)
@@ -120,13 +120,13 @@ public class PlacementData
     public List<Vector3Int> occupiedPositions;
     public int ID { get; private set; }
     public int PlacedObjectIndex { get; private set; }
-    public bool IsBoss { get; private set; }
+    public ObjectType Type { get; private set; }
 
-    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex, bool isBoss)
+    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex, ObjectType objectType)
     {
         this.occupiedPositions = occupiedPositions;
         ID = iD;
         PlacedObjectIndex = placedObjectIndex;
-        IsBoss = isBoss;
+        Type = objectType;
     }
 }

@@ -30,11 +30,12 @@ public class ObjectData
     public int Price { get; private set; }
 
     [field: SerializeField]
-    public bool isBoss { get; private set; }
+    public ObjectType Type { get; private set; }
 }
 
 public enum ObjectType
 {
-    Floor,
-    Structure
+    Trap,
+    Troop,
+    Boss
 }

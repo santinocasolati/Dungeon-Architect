@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class DungeonLevelManager : MonoBehaviour
 
     [SerializeField] private int maxLevel = 10;
     [SerializeField] private List<GameObject> roomsPerLevel;
+
+    public Action<int> levelModified;
 
     private int currentLevel = 1;
 
@@ -25,6 +28,7 @@ public class DungeonLevelManager : MonoBehaviour
     public void ResetManager()
     {
         currentLevel = 1;
+        levelModified?.Invoke(currentLevel);
     }
 
     public void LevelUp()
@@ -32,6 +36,7 @@ public class DungeonLevelManager : MonoBehaviour
         if (currentLevel == maxLevel) return;
         currentLevel++;
 
+        levelModified?.Invoke(currentLevel);
         roomsPerLevel[currentLevel - 1].SetActive(true);
     }
 }

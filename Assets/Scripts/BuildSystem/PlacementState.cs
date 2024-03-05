@@ -45,16 +45,16 @@ public class PlacementState : IBuildingState
         if (!placementValidity) return;
 
         
-        if (!database.objects[selectedObjectIndex].isBoss && !CoinsManager.instance.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
+        if (database.objects[selectedObjectIndex].Type != ObjectType.Boss && !CoinsManager.instance.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
 
-        int index = objectPlacer.PlaceObject(database.objects[selectedObjectIndex].Prefab, objectPos, database.objects[selectedObjectIndex].isBoss);
+        int index = objectPlacer.PlaceObject(database.objects[selectedObjectIndex].Prefab, objectPos, database.objects[selectedObjectIndex].Type);
 
-        objectsData.AddObjectAt(gridPos, database.objects[selectedObjectIndex].Size, database.objects[selectedObjectIndex].Id, index, database.objects[selectedObjectIndex].isBoss);
+        objectsData.AddObjectAt(gridPos, database.objects[selectedObjectIndex].Size, database.objects[selectedObjectIndex].Id, index, database.objects[selectedObjectIndex].Type);
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
-        if (database.objects[selectedObjectIndex].isBoss)
+        if (database.objects[selectedObjectIndex].Type == ObjectType.Boss)
         {
             return (objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid) && !GameManager.instance.BossPlaced);
         }
