@@ -12,6 +12,7 @@ public class RoundManager : MonoBehaviour
     public int enemyAmountIncrement = 1;
     public int roundsToIncrement = 5;
     public int baseCoinsPerRound = 100;
+    public int xpPerRound = 2;
     public int coinsToIncrement = 10;
 
     public UnityEvent onRoundLost;
@@ -53,7 +54,7 @@ public class RoundManager : MonoBehaviour
         SpawnManager.instance.SpawnEnemies(currentEnemyAmount, GameManager.instance.Floors);
     }
 
-    public void EndRound(bool win)
+    public void EndRound(bool win, int gainedXp)
     {
         if (!roundStarted) return;
 
@@ -74,6 +75,7 @@ public class RoundManager : MonoBehaviour
         ResetOriginalPositions();
         SpawnManager.instance.DespawnEnemies();
         GameManager.instance.EndRound();
+        DungeonLevelManager.instance.AddXp(xpPerRound + gainedXp);
         roundStarted = false;
     }
 

@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private LayerMask enemiesLayer;
 
     private List<GameObject> aliveEnemies = new List<GameObject>();
+    public int xpGained = 0;
 
     private void OnEnable()
     {
@@ -38,6 +39,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnEnemies(int amount, List<GameObject> floors)
     {
         aliveEnemies.Clear();
+        xpGained = 0;
 
         for (int i = 0; i < amount; i++)
         {
@@ -102,15 +104,16 @@ public class SpawnManager : MonoBehaviour
         HealthHandler enemyHealth = spawnedEnemy.GetComponent<HealthHandler>();
         if (enemyHealth != null)
         {
-            enemyHealth.OnDeath.AddListener(() => OnEnemyDeath(spawnedEnemy, selectedEnemy.Reward));
+            enemyHealth.OnDeath.AddListener(() => OnEnemyDeath(spawnedEnemy, selectedEnemy.CoinsReward, selectedEnemy.XpReward));
         }
     }
 
-    private void OnEnemyDeath(GameObject enemy, int reward)
+    private void OnEnemyDeath(GameObject enemy, int coinsReward, int xpReward)
     {
         aliveEnemies.Remove(enemy);
         Destroy(enemy);
-        CoinsManager.instance.AddCoins(reward);
+        CoinsManager.instance.AddCoins(coinsReward);
+        xpGained += xpReward;
 
         if (aliveEnemies.Count == 0)
         {
@@ -120,7 +123,7 @@ public class SpawnManager : MonoBehaviour
 
     private void RoundCleared()
     {
-        RoundManager.instance.EndRound(true);
+        RoundManager.instance.EndRound(true, xpGained);
     }
 
     public void DespawnEnemies()

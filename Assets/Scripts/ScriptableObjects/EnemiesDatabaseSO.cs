@@ -21,5 +21,8 @@ public class EnemyData
     public GameObject Prefab { get; private set; }
 
     [field: SerializeField]
-    public int Reward { get; private set; }
+    public int CoinsReward { get; private set; }
+
+    [field: SerializeField]
+    public int XpReward { get; private set; }
 }

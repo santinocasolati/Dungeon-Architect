@@ -51,7 +51,7 @@ public class HealthHandler : MonoBehaviour
         {
             if (isBoss)
             {
-                RoundManager.instance.EndRound(false);
+                RoundManager.instance.EndRound(false, SpawnManager.instance.xpGained);
             } else
             {
                 SimpleChaseAI ai = gameObject.GetComponent<SimpleChaseAI>();
