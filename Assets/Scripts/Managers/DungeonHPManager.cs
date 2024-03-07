@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class DungeonHPManager : MonoBehaviour
     public static DungeonHPManager instance;
 
     [SerializeField] private int maxHp = 10;
+
+    public Action<int, int> DungeonHPModified;
 
     private int currentHp;
 
@@ -20,6 +23,15 @@ public class DungeonHPManager : MonoBehaviour
         instance = this;
 
         currentHp = maxHp;
+        DungeonHPModified?.Invoke(maxHp, currentHp);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            DamageDungeon(5);
+        }
     }
 
     public void DamageDungeon(int damage)
@@ -28,8 +40,11 @@ public class DungeonHPManager : MonoBehaviour
 
         if (currentHp <= 0)
         {
+            currentHp = 0;
             GameManager.instance.Defeat();
         }
+
+        DungeonHPModified?.Invoke(maxHp, currentHp);
     }
 
     public void HealDungeon(int heal)
@@ -40,5 +55,7 @@ public class DungeonHPManager : MonoBehaviour
         {
             currentHp = maxHp;
         }
+
+        DungeonHPModified?.Invoke(maxHp, currentHp);
     }
 }

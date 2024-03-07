@@ -43,7 +43,6 @@ public class PlacementState : IBuildingState
     {
         bool placementValidity = CheckPlacementValidity(gridPos, selectedObjectIndex);
         if (!placementValidity) return;
-
         
         if (database.objects[selectedObjectIndex].Type != ObjectType.Boss && !CoinsManager.instance.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
 
