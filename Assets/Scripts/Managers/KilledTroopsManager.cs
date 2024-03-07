@@ -20,12 +20,6 @@ public class KilledTroopsManager : MonoBehaviour
         }
 
         instance = this;
-        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
-    }
-
-    public void ResetManager()
-    {
-        troopsToRemove.Clear();
     }
 
     public void AssignGridData(GridData data)

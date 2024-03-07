@@ -33,13 +33,7 @@ public class RoundManager : MonoBehaviour
         }
 
         instance = this;
-        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
 
-        ResetManager();
-    }
-
-    public void ResetManager()
-    {
         roundStarted = false;
         currentRound = 1;
         currentEnemyAmount = initialEnemyAmount;

@@ -18,13 +18,7 @@ public class DungeonHPManager : MonoBehaviour
         }
 
         instance = this;
-        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
 
-        ResetManager();
-    }
-
-    public void ResetManager()
-    {
         currentHp = maxHp;
     }
 

@@ -27,13 +27,6 @@ public class SpawnManager : MonoBehaviour
         }
 
         instance = this;
-
-        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
-    }
-
-    public void ResetManager()
-    {
-        aliveEnemies.Clear();
     }
 
     public void SpawnEnemies(int amount, List<GameObject> floors)

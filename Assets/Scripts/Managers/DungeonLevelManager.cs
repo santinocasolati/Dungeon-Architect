@@ -27,11 +27,7 @@ public class DungeonLevelManager : MonoBehaviour
         }
 
         instance = this;
-        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
-    }
 
-    public void ResetManager()
-    {
         currentLevel = 1;
         currentXp = 0;
         levelModified?.Invoke(currentLevel);
@@ -64,6 +60,10 @@ public class DungeonLevelManager : MonoBehaviour
         currentLevel++;
 
         levelModified?.Invoke(currentLevel);
-        roomsPerLevel[currentLevel - 1].SetActive(true);
+        
+        if (currentLevel - 1 < roomsPerLevel.Count)
+        {
+            roomsPerLevel[currentLevel - 1].SetActive(true);
+        }
     }
 }

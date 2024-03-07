@@ -20,7 +20,6 @@ public class LoanManager : MonoBehaviour
         }
 
         instance = this;
-        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
 
         loansUsed = new();
         loansActive = new();

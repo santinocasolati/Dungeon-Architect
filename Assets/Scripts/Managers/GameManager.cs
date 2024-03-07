@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnRoundStart, OnRoundEnd;
     public bool BossPlaced { get; private set; }
     public Transform BossInstance { get; private set; }
-    [SerializeField] private List<GameObject> originalFloors;
 
     public List<GameObject> Floors { get; private set; }
 
@@ -22,29 +21,11 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        UtilitiesFunctions.instance.ManagerSingleton(gameObject);
 
         Floors = new();
 
-        ResetGame();
-    }
-
-    public void ResetGame()
-    {
         BossPlaced = false;
         BossInstance = null;
-
-        originalFloors.ForEach(floor =>
-        {
-            Floors.Add(floor);
-        });
-
-        RoundManager.instance.ResetManager();
-        SpawnManager.instance.ResetManager();
-        DungeonHPManager.instance.ResetManager();
-        DungeonLevelManager.instance.ResetManager();
-        CoinsManager.instance.ResetManager();
-        KilledTroopsManager.instance.ResetManager();
     }
 
     public void StartRound()
@@ -74,7 +55,6 @@ public class GameManager : MonoBehaviour
 
     public void Defeat()
     {
-        ResetGame();
         Debug.Log("Defeat");
     }
 }
