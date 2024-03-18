@@ -24,14 +24,19 @@ public class SimpleChaseAI : MonoBehaviour
     protected AIDestinationSetter targetSetter;
     public AIPath pathSetter;
     protected Rigidbody rb;
+    protected Animator animator;
 
     public Transform currentTarget;
+
+    private Vector3 lastPosition;
 
     private void Awake()
     {
         targetSetter = gameObject.GetComponent<AIDestinationSetter>();
         pathSetter = gameObject.GetComponent<AIPath>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+        lastPosition = transform.position;
     }
 
     protected virtual void Start()
@@ -41,6 +46,8 @@ public class SimpleChaseAI : MonoBehaviour
 
     void Update()
     {
+        animator.SetBool("IsMoving", pathSetter.velocity.magnitude > 0.1f && !pathSetter.isStopped);
+
         CheckNearEnemies();
         CheckAttack();
 
@@ -54,6 +61,8 @@ public class SimpleChaseAI : MonoBehaviour
                 transform.rotation = pr.originalRot;
             }
         }
+
+        lastPosition = transform.position;
     }
 
     private void CheckNearEnemies()
@@ -106,6 +115,8 @@ public class SimpleChaseAI : MonoBehaviour
 
     protected virtual void Attack()
     {
+        animator.ResetTrigger("Attack");
+
         if (currentTarget != null)
         {
             HealthHandler hh = currentTarget.gameObject.GetComponent<HealthHandler>();
@@ -123,6 +134,8 @@ public class SimpleChaseAI : MonoBehaviour
             if (hh != null)
             {
                 attackInCooldown = true;
+
+                animator.SetTrigger("Attack");
 
                 if (IsAttackSuccessfull())
                 {
@@ -148,6 +161,10 @@ public class SimpleChaseAI : MonoBehaviour
 
     public void StopCurrentPath()
     {
+        animator.SetBool("IsMoving", false);
+        animator.ResetTrigger("Attack");
+        animator.Play("Idle");
+
         targetSetter.target = transform;
         currentTarget = null;
         pathSetter.isStopped = true;
