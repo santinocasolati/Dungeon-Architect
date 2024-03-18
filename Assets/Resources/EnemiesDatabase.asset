@@ -13,8 +13,27 @@ MonoBehaviour:
   m_Name: EnemiesDatabase
   m_EditorClassIdentifier: 
   enemies:
-  - <Name>k__BackingField: TestEnemy
+  - <Name>k__BackingField: BarbarianEnemy
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 1598069070547527076, guid: d810ee45726551347ab1b5c9dd307a70,
+    <Prefab>k__BackingField: {fileID: 8563713583603042359, guid: ae86297b4957c364196a57185f716b17,
       type: 3}
-    <Reward>k__BackingField: 100
+    <CoinsReward>k__BackingField: 0
+    <XpReward>k__BackingField: 0
+  - <Name>k__BackingField: KnightEnemy
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2424804096088790671, guid: 3e03c208cae973f43ab4eab956affd83,
+      type: 3}
+    <CoinsReward>k__BackingField: 0
+    <XpReward>k__BackingField: 0
+  - <Name>k__BackingField: MageEnemy
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1071879011042492402, guid: ec38893df2f5efe4aa9557b188d487f0,
+      type: 3}
+    <CoinsReward>k__BackingField: 0
+    <XpReward>k__BackingField: 0
+  - <Name>k__BackingField: RogueEnemy
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5366246810953759731, guid: 35817e34539f19b439ccfa27d06c4f62,
+      type: 3}
+    <CoinsReward>k__BackingField: 0
+    <XpReward>k__BackingField: 0

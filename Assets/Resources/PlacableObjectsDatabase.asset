@@ -21,14 +21,6 @@ MonoBehaviour:
     <UnlockLevel>k__BackingField: 0
     <Price>k__BackingField: 0
     <Type>k__BackingField: 2
-  - <Name>k__BackingField: Troop
-    <Id>k__BackingField: 1
-    <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 51348965025132666, guid: e08ff7b5219366c48bdc5e828a78195a,
-      type: 3}
-    <UnlockLevel>k__BackingField: 0
-    <Price>k__BackingField: 5
-    <Type>k__BackingField: 1
   - <Name>k__BackingField: Trap
     <Id>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
@@ -37,3 +29,35 @@ MonoBehaviour:
     <UnlockLevel>k__BackingField: 0
     <Price>k__BackingField: 5
     <Type>k__BackingField: 0
+  - <Name>k__BackingField: Mage Skeleton
+    <Id>k__BackingField: 3
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3722453835838215595, guid: eb9f26f09faec9648936defe1e590e70,
+      type: 3}
+    <UnlockLevel>k__BackingField: 0
+    <Price>k__BackingField: 5
+    <Type>k__BackingField: 1
+  - <Name>k__BackingField: Minion Skeleton
+    <Id>k__BackingField: 4
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3354631041277889337, guid: b71b7930e74637642b6a7cd397fb5a31,
+      type: 3}
+    <UnlockLevel>k__BackingField: 0
+    <Price>k__BackingField: 5
+    <Type>k__BackingField: 1
+  - <Name>k__BackingField: Rogue Skeleton
+    <Id>k__BackingField: 5
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 992283025526596368, guid: f8ebe11bee2c39a499d6e60e3fa85460,
+      type: 3}
+    <UnlockLevel>k__BackingField: 0
+    <Price>k__BackingField: 5
+    <Type>k__BackingField: 1
+  - <Name>k__BackingField: Warrior Skeleton
+    <Id>k__BackingField: 6
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3701155940381880794, guid: ea5923d443a727c48a4b0a6626988115,
+      type: 3}
+    <UnlockLevel>k__BackingField: 0
+    <Price>k__BackingField: 5
+    <Type>k__BackingField: 1

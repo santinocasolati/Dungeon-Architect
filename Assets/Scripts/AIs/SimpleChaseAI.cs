@@ -91,6 +91,12 @@ public class SimpleChaseAI : MonoBehaviour
         if (Vector3.Distance(targetSetter.target.position, transform.position) < attackRange && !attackInCooldown)
         {
             inAttackRange = true;
+
+            Vector3 direction = targetSetter.target.position - transform.position;
+            Vector3 planeDirection = Vector3.ProjectOnPlane(direction, Vector3.up);
+            float angle = Vector3.SignedAngle(transform.forward, planeDirection, Vector3.up);
+            transform.Rotate(Vector3.up, angle, Space.World);
+
             Attack();
         } else
         {
