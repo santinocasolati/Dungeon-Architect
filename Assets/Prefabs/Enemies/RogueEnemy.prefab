@@ -187,9 +187,9 @@ MonoBehaviour:
   finalTarget: {fileID: 0}
   enemiesLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   detectionRange: 5
-  attackRange: 0.5
+  attackRange: 1
   attackCooldown: 0.5
   avoidanceRadius: 1
   attackDamage: 10

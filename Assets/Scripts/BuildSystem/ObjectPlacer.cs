@@ -16,26 +16,27 @@ public class ObjectPlacer : MonoBehaviour
         objectInstance.transform.position = objectPos;
         placedGameObjects.Add(objectInstance);
 
-        if (objectType == ObjectType.Boss)
-        {
-            GameManager.instance.BossStatus(true, objectInstance.transform);
-        } else
-        {
-            HealthHandler healthHandler = objectInstance.GetComponent<HealthHandler>();
+        HealthHandler healthHandler = objectInstance.GetComponent<HealthHandler>();
 
-            if (healthHandler == null)
+        if (healthHandler == null)
+        {
+            objectInstance.GetComponentInChildren<HealthHandler>();
+        }
+
+        if (healthHandler != null)
+        {
+            TroopStore ts = new TroopStore();
+            ts.troopInstance = objectInstance;
+            ts.troopIndex = placedGameObjects.Count - 1;
+
+            RoundManager.instance.placedTroops.Add(ts);
+
+            if (objectType == ObjectType.Boss)
             {
-                objectInstance.GetComponentInChildren<HealthHandler>();
+                GameManager.instance.BossStatus(true, objectInstance.transform);
             }
-
-            if (healthHandler != null)
+            else
             {
-                TroopStore ts = new TroopStore();
-                ts.troopInstance = objectInstance;
-                ts.troopIndex = placedGameObjects.Count - 1;
-
-                RoundManager.instance.placedTroops.Add(ts);
-
                 healthHandler.OnDeath.AddListener(() => RemoveObjectAt(ts.troopIndex, false));
             }
         }
