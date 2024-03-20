@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestTrap : BaseTrap
+public class SpikesTrap : BaseTrap
 {
     protected override void Attack(Collider other)
     {

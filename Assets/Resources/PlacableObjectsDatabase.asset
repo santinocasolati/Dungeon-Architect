@@ -16,7 +16,7 @@ MonoBehaviour:
   - <Name>k__BackingField: Boss
     <Id>k__BackingField: 0
     <Size>k__BackingField: {x: 2, y: 2}
-    <Prefab>k__BackingField: {fileID: 1796986147070654013, guid: 8c4d155d9d876c24ab8cd00f570d564d,
+    <Prefab>k__BackingField: {fileID: 6012415929235852994, guid: 8187f2a6879c47d4c9338181e2326e87,
       type: 3}
     <UnlockLevel>k__BackingField: 0
     <Price>k__BackingField: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
   - <Name>k__BackingField: Trap
     <Id>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 4028219306762321887, guid: 79a8f55e76c3c9d478bfbd7ce5ab80ba,
+    <Prefab>k__BackingField: {fileID: 4865498518379708888, guid: a9745ae17f3a08b4d9a87a628a59c8a0,
       type: 3}
     <UnlockLevel>k__BackingField: 0
     <Price>k__BackingField: 5
