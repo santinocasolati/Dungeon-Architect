@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AIPath))]
 [RequireComponent(typeof(AIDestinationSetter))]
@@ -29,6 +30,8 @@ public class SimpleChaseAI : MonoBehaviour
     public Transform currentTarget;
 
     private Vector3 lastPosition;
+
+    public UnityEvent OnAttackMissed;
 
     private void Awake()
     {
@@ -140,6 +143,9 @@ public class SimpleChaseAI : MonoBehaviour
                 if (IsAttackSuccessfull())
                 {
                     hh.TakeDamage(attackDamage);
+                } else
+                {
+                    OnAttackMissed?.Invoke();
                 }
                 
                 Invoke(nameof(ResetAttack), attackCooldown);

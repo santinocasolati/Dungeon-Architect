@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseTrap : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BaseTrap : MonoBehaviour
     public LayerMask enemiesLayer;
 
     private bool canAttack = true;
+
+    public UnityEvent OnAttackMissed;
 
     private void OnTriggerStay(Collider other)
     {
@@ -38,6 +41,9 @@ public class BaseTrap : MonoBehaviour
             if (IsAttackSuccessfull())
             {
                 hh.TakeDamage(trapDamage);
+            } else
+            {
+                OnAttackMissed?.Invoke();
             }
 
             canAttack = false;
