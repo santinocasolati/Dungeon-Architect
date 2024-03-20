@@ -22,9 +22,26 @@ public class HealthHandler : MonoBehaviour
     {
         currentHealth -= damage;
 
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.color = Color.red;
+        }
+
+        Invoke(nameof(ResetColor), 0.15f);
+
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    private void ResetColor()
+    {
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.color = Color.white;
         }
     }
 
