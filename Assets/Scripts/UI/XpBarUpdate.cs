@@ -10,7 +10,7 @@ public class XpBarUpdate : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        DungeonLevelManager.instance.xpModified += UpdateXpBar;
+        DungeonLevelManager._instance.xpModified += UpdateXpBar;
     }
 
     private void UpdateXpBar(int maxXp, int currentXp)

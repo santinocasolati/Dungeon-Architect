@@ -8,6 +8,6 @@ public class RangedEnemyAI : RangedAI
     {
         base.Start();
 
-        finalTarget = GameManager.instance.BossInstance;
+        finalTarget = GameManager._instance.BossInstance;
     }
 }

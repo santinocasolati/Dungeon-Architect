@@ -50,7 +50,7 @@ public class RemovingState : IBuildingState
             int sellPrice = database.objects[objectId].Price;
             sellPrice = Mathf.FloorToInt(sellPrice * 0.9f);
             sellPrice = sellPrice == 0 ? 1 : sellPrice;
-            CoinsManager.instance.AddCoins(sellPrice);
+            CoinsManager.AddCoins(sellPrice);
         }
 
         objectPlacer.RemoveObjectAt(gameObjectIndex, selectedData.GetIfPosHasBoss(gridPos));

@@ -21,7 +21,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         objectsData = new GridData();
-        KilledTroopsManager.instance.AssignGridData(objectsData);
+        KilledTroopsManager.AssignGridData(objectsData);
     }
 
     public void StartPlacement(int id)

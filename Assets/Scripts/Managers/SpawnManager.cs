@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SpawnManager : MonoBehaviour
 {
-    public static SpawnManager instance;
+    public static SpawnManager _instance;
 
     public Transform enemiesContainer;
     public EnemiesDatabaseSO enemiesDatabase;
@@ -19,43 +17,43 @@ public class SpawnManager : MonoBehaviour
     private List<GameObject> aliveEnemies = new List<GameObject>();
     public int xpGained = 0;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
     }
 
-    public void SpawnEnemies(int amount, List<GameObject> floors)
+    public static void SpawnEnemies(int amount, List<GameObject> floors)
     {
-        aliveEnemies.Clear();
-        xpGained = 0;
+        _instance.aliveEnemies.Clear();
+        _instance.xpGained = 0;
 
         for (int i = 0; i < amount; i++)
         {
             GameObject randomFloor = floors[Random.Range(0, floors.Count)];
             Collider collider = randomFloor.GetComponent<Collider>();
 
-            EnemyData selectedEnemy = enemiesDatabase.enemies[Random.Range(0, enemiesDatabase.enemies.Count)];
+            EnemyData selectedEnemy = _instance.enemiesDatabase.enemies[Random.Range(0, _instance.enemiesDatabase.enemies.Count)];
 
             bool positionValid = false;
             Vector3 enemyPos = Vector3.zero;
 
             while (!positionValid)
             {
-                Vector3 randomPoint = GetRandomPoint(collider);
-                Vector3Int gridPos = grid.WorldToCell(randomPoint);
-                enemyPos = grid.CellToWorld(gridPos);
+                Vector3 randomPoint = _instance.GetRandomPoint(collider);
+                Vector3Int gridPos = _instance.grid.WorldToCell(randomPoint);
+                enemyPos = _instance.grid.CellToWorld(gridPos);
                 enemyPos.x += .5f;
                 enemyPos.z += .5f;
 
-                positionValid = IsPositionValid(enemyPos, selectedEnemy.Size);
+                positionValid = _instance.IsPositionValid(enemyPos, selectedEnemy.Size);
             }
 
-            InstantiateEnemy(enemyPos, selectedEnemy);
+            _instance.InstantiateEnemy(enemyPos, selectedEnemy);
         }
     }
 
@@ -105,7 +103,7 @@ public class SpawnManager : MonoBehaviour
     {
         aliveEnemies.Remove(enemy);
         Destroy(enemy);
-        CoinsManager.instance.AddCoins(coinsReward);
+        CoinsManager.AddCoins(coinsReward);
         xpGained += xpReward;
 
         if (aliveEnemies.Count == 0)
@@ -116,7 +114,7 @@ public class SpawnManager : MonoBehaviour
 
     private void RoundCleared()
     {
-        RoundManager.instance.EndRound(true, xpGained);
+        RoundManager.EndRound(true, xpGained);
     }
 
     public void DespawnEnemies()

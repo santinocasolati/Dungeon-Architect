@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DungeonHPManager : MonoBehaviour
 {
-    public static DungeonHPManager instance;
+    public static DungeonHPManager _instance;
 
     [SerializeField] private int maxHp = 10;
 
@@ -13,25 +13,17 @@ public class DungeonHPManager : MonoBehaviour
 
     private int currentHp;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
 
         currentHp = maxHp;
         DungeonHPModified?.Invoke(maxHp, currentHp);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            DamageDungeon(5);
-        }
     }
 
     public void DamageDungeon(int damage)
@@ -41,7 +33,7 @@ public class DungeonHPManager : MonoBehaviour
         if (currentHp <= 0)
         {
             currentHp = 0;
-            GameManager.instance.Defeat();
+            GameManager.Defeat();
         }
 
         DungeonHPModified?.Invoke(maxHp, currentHp);

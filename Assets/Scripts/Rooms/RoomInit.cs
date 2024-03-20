@@ -6,7 +6,7 @@ public class RoomInit : MonoBehaviour
     {
         AstarPath.active.Scan();
 
-        GameManager.instance.RoomPurchase(gameObject);
+        GameManager.RoomPurchase(gameObject);
     }
 
     private void OnDisable()

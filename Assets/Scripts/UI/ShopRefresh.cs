@@ -14,7 +14,7 @@ public class ShopRefresh : MonoBehaviour
 
     private void Awake()
     {
-        DungeonLevelManager.instance.levelModified += RefreshShop;
+        DungeonLevelManager._instance.levelModified += RefreshShop;
         RefreshShop(0);
     }
 

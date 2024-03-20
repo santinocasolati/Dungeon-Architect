@@ -11,7 +11,7 @@ public class HPBarUpdate : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        DungeonHPManager.instance.DungeonHPModified += UpdateHPBar;
+        DungeonHPManager._instance.DungeonHPModified += UpdateHPBar;
     }
 
     private void UpdateHPBar(int maxHP, int currentHP)

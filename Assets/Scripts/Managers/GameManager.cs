@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager _instance;
 
     public UnityEvent OnRoundStart, OnRoundEnd;
     public bool BossPlaced { get; private set; }
@@ -15,12 +15,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
 
         Floors = new();
 
@@ -35,25 +35,25 @@ public class GameManager : MonoBehaviour
         OnRoundStart?.Invoke();
     }
 
-    public void EndRound()
+    public static void EndRound()
     {
-        OnRoundEnd?.Invoke();
+        _instance.OnRoundEnd?.Invoke();
 
-        KilledTroopsManager.instance.StartCleaning();
+        KilledTroopsManager.StartCleaning();
     }
 
-    public void RoomPurchase(GameObject floor)
+    public static void RoomPurchase(GameObject floor)
     {
-        Floors.Add(floor);
+        _instance.Floors.Add(floor);
     }
 
-    public void BossStatus(bool bossPlaced, Transform bossInstance)
+    public static void BossStatus(bool bossPlaced, Transform bossInstance)
     {
-        this.BossPlaced = bossPlaced;
-        this.BossInstance = bossInstance;
+        _instance.BossPlaced = bossPlaced;
+        _instance.BossInstance = bossInstance;
     }
 
-    public void Defeat()
+    public static void Defeat()
     {
         Debug.Log("Defeat");
     }

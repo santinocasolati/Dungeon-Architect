@@ -29,11 +29,11 @@ public class ObjectPlacer : MonoBehaviour
             ts.troopInstance = objectInstance;
             ts.troopIndex = placedGameObjects.Count - 1;
 
-            RoundManager.instance.placedTroops.Add(ts);
+            RoundManager._instance.placedTroops.Add(ts);
 
             if (objectType == ObjectType.Boss)
             {
-                GameManager.instance.BossStatus(true, objectInstance.transform);
+                GameManager.BossStatus(true, objectInstance.transform);
             }
             else
             {
@@ -50,13 +50,13 @@ public class ObjectPlacer : MonoBehaviour
 
         if (isBoss)
         {
-            GameManager.instance.BossStatus(false, null);
+            GameManager.BossStatus(false, null);
         }
 
-        TroopStore foundTroop = RoundManager.instance.placedTroops.FirstOrDefault(troop => troop.troopIndex == gameObjectIndex);
+        TroopStore foundTroop = RoundManager._instance.placedTroops.FirstOrDefault(troop => troop.troopIndex == gameObjectIndex);
         if (foundTroop != null)
         {
-            RoundManager.instance.placedTroops.Remove(foundTroop);
+            RoundManager._instance.placedTroops.Remove(foundTroop);
         }
 
 

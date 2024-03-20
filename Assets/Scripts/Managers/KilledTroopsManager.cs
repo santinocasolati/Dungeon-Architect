@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KilledTroopsManager : MonoBehaviour
 {
-    public static KilledTroopsManager instance;
+    public static KilledTroopsManager _instance;
 
     [SerializeField] private ObjectPlacer objectPlacer;
 
@@ -12,34 +12,34 @@ public class KilledTroopsManager : MonoBehaviour
 
     private List<Vector3> troopsToRemove = new();
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
     }
 
-    public void AssignGridData(GridData data)
+    public static void AssignGridData(GridData data)
     {
-        objectsData = data;
+        _instance.objectsData = data;
     }
 
-    public void AddKilled(Vector3 killedPos)
+    public static void AddKilled(Vector3 killedPos)
     {
-        troopsToRemove.Add(killedPos);
+        _instance.troopsToRemove.Add(killedPos);
     }
 
-    public void StartCleaning()
+    public static void StartCleaning()
     {
-        troopsToRemove.ForEach(t =>
+        _instance.troopsToRemove.ForEach(t =>
         {
-            KillTroop(t);
+            _instance.KillTroop(t);
         });
 
-        troopsToRemove.Clear();
+        _instance.troopsToRemove.Clear();
     }
 
     private void KillTroop(Vector3 gridPos)

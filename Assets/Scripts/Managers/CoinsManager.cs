@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CoinsManager : MonoBehaviour
 {
-    public static CoinsManager instance;
+    public static CoinsManager _instance;
 
     public int startingCoins = 5;
 
@@ -13,14 +13,14 @@ public class CoinsManager : MonoBehaviour
 
     public Action<string> coinsModified;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
 
         SetCoins(startingCoins);
     }
@@ -31,29 +31,29 @@ public class CoinsManager : MonoBehaviour
         coinsModified?.Invoke(currentCoins.ToString());
     }
 
-    public int GetCoins() => currentCoins;
+    public static int GetCoins() => _instance.currentCoins;
 
-    public void AddCoins(int coins)
+    public static void AddCoins(int coins)
     {
-        currentCoins += coins;
-        coinsModified?.Invoke(currentCoins.ToString());
+        _instance.currentCoins += coins;
+        _instance.coinsModified?.Invoke(_instance.currentCoins.ToString());
     }
 
-    public bool RemoveCoins(int coins)
+    public static bool RemoveCoins(int coins)
     {
-        if (currentCoins - coins < 0)
+        if (_instance.currentCoins - coins < 0)
         {
             return false;
         }
 
-        currentCoins -= coins;
-        coinsModified?.Invoke(currentCoins.ToString());
+        _instance.currentCoins -= coins;
+        _instance.coinsModified?.Invoke(_instance.currentCoins.ToString());
         return true;
     }
 
-    public void PayWithNegatives(int coins)
+    public static void PayWithNegatives(int coins)
     {
-        currentCoins -= coins;
-        coinsModified?.Invoke(currentCoins.ToString());
+        _instance.currentCoins -= coins;
+        _instance.coinsModified?.Invoke(_instance.currentCoins.ToString());
     }
 }

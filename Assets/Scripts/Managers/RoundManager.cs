@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class RoundManager : MonoBehaviour
 {
-    public static RoundManager instance;
+    public static RoundManager _instance;
 
     public int initialEnemyAmount = 1;
     public int enemyAmountIncrement = 1;
@@ -25,14 +25,14 @@ public class RoundManager : MonoBehaviour
 
     private bool roundStarted = false;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
 
         roundStarted = false;
         currentRound = 1;
@@ -45,32 +45,32 @@ public class RoundManager : MonoBehaviour
         if (roundStarted) return;
         roundStarted = true;
         SetOriginalPositions();
-        SpawnManager.instance.SpawnEnemies(currentEnemyAmount, GameManager.instance.Floors);
+        SpawnManager.SpawnEnemies(currentEnemyAmount, GameManager._instance.Floors);
     }
 
-    public void EndRound(bool win, int gainedXp)
+    public static void EndRound(bool win, int gainedXp)
     {
-        if (!roundStarted) return;
+        if (!_instance.roundStarted) return;
 
         if (!win)
         {
-            onRoundLost?.Invoke();
+            _instance.onRoundLost?.Invoke();
         }
 
-        CoinsManager.instance.AddCoins(currentCoinsAmount);
-        currentRound++;
+        CoinsManager.AddCoins(_instance.currentCoinsAmount);
+        _instance.currentRound++;
 
-        if (currentRound % roundsToIncrement == 0)
+        if (_instance.currentRound % _instance.roundsToIncrement == 0)
         {
-            currentEnemyAmount += enemyAmountIncrement;
-            currentCoinsAmount += coinsToIncrement;
+            _instance.currentEnemyAmount += _instance.enemyAmountIncrement;
+            _instance.currentCoinsAmount += _instance.coinsToIncrement;
         }
 
-        ResetOriginalPositions();
-        SpawnManager.instance.DespawnEnemies();
-        GameManager.instance.EndRound();
-        DungeonLevelManager.instance.AddXp(xpPerRound + gainedXp);
-        roundStarted = false;
+        _instance.ResetOriginalPositions();
+        SpawnManager._instance.DespawnEnemies();
+        GameManager.EndRound();
+        DungeonLevelManager.AddXp(_instance.xpPerRound + gainedXp);
+        _instance.roundStarted = false;
     }
 
     private void SetOriginalPositions()

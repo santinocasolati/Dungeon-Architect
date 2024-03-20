@@ -51,7 +51,7 @@ public class HealthHandler : MonoBehaviour
         {
             if (isBoss)
             {
-                RoundManager.instance.EndRound(false, SpawnManager.instance.xpGained);
+                RoundManager.EndRound(false, SpawnManager._instance.xpGained);
             } else
             {
                 SimpleChaseAI ai = gameObject.GetComponent<SimpleChaseAI>();
@@ -62,7 +62,7 @@ public class HealthHandler : MonoBehaviour
                 }
 
                 PositionReset pr = ai.gameObject.GetComponent<PositionReset>();
-                KilledTroopsManager.instance.AddKilled(pr.parentOriginalPos);
+                KilledTroopsManager.AddKilled(pr.parentOriginalPos);
                 gameObject.SetActive(false);
             }
         }

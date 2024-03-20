@@ -5,15 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager _instance;
 
     private AudioSource audioSource;
 
     private void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -24,9 +24,9 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlaySound(AudioClip audio)
+    public static void PlaySound(AudioClip audio)
     {
-        audioSource.clip = audio;
-        audioSource.PlayOneShot(audio);
+        _instance.audioSource.clip = audio;
+        _instance.audioSource.PlayOneShot(audio);
     }
 }

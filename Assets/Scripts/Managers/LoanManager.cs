@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class LoanManager : MonoBehaviour
 {
-    public static LoanManager instance;
+    public static LoanManager _instance;
 
     [SerializeField] private LoansDatabaseSO loansDatabase;
 
     private List<int> loansUsed;
     private List<ActiveLoan> loansActive;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
 
         loansUsed = new();
         loansActive = new();
@@ -34,7 +34,7 @@ public class LoanManager : MonoBehaviour
         if (foundLoan == null) return;
 
         loansUsed.Add(id);
-        CoinsManager.instance.AddCoins(foundLoan.Amount);
+        CoinsManager.AddCoins(foundLoan.Amount);
 
         ActiveLoan newLoan = new(foundLoan);
         loansActive.Add(newLoan);
@@ -86,7 +86,7 @@ public class ActiveLoan
 
     public bool PayRound()
     {
-        CoinsManager.instance.PayWithNegatives(Data.MaxPaymentPerRound);
+        CoinsManager.PayWithNegatives(Data.MaxPaymentPerRound);
 
         coinsPaid += Data.MaxPaymentPerRound;
 
@@ -97,6 +97,6 @@ public class ActiveLoan
     {
         int remainingAmount = coinsPaid - totalToPay;
 
-        return CoinsManager.instance.RemoveCoins(remainingAmount);
+        return CoinsManager.RemoveCoins(remainingAmount);
     }
 }

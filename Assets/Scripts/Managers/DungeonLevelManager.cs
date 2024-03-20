@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DungeonLevelManager : MonoBehaviour
 {
-    public static DungeonLevelManager instance;
+    public static DungeonLevelManager _instance;
 
     [SerializeField] private int maxLevel = 10;
     [SerializeField] private int xpPrice = 4;
@@ -19,14 +19,14 @@ public class DungeonLevelManager : MonoBehaviour
     private int currentLevel = 1;
     private int currentXp = 0;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
-            Destroy(instance);
+            Destroy(_instance);
         }
 
-        instance = this;
+        _instance = this;
 
         currentLevel = 1;
         currentXp = 0;
@@ -36,22 +36,22 @@ public class DungeonLevelManager : MonoBehaviour
 
     public void BuyXp()
     {
-        if (!CoinsManager.instance.RemoveCoins(xpPrice)) return;
+        if (!CoinsManager.RemoveCoins(xpPrice)) return;
 
         AddXp(xpBuyAmount);
     }
 
-    public void AddXp(int xp)
+    public static void AddXp(int xp)
     {
-        currentXp += xp;
+        _instance.currentXp += xp;
 
-        if (currentXp >= xpPerLevelUp[currentLevel - 1])
+        if (_instance.currentXp >= _instance.xpPerLevelUp[_instance.currentLevel - 1])
         {
-            currentXp -= xpPerLevelUp[currentLevel - 1];
-            LevelUp();
+            _instance.currentXp -= _instance.xpPerLevelUp[_instance.currentLevel - 1];
+            _instance.LevelUp();
         }
 
-        xpModified?.Invoke(xpPerLevelUp[currentLevel - 1], currentXp);
+        _instance.xpModified?.Invoke(_instance.xpPerLevelUp[_instance.currentLevel - 1], _instance.currentXp);
     }
 
     public void LevelUp()

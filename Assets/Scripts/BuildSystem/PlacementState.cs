@@ -44,7 +44,7 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPos, selectedObjectIndex);
         if (!placementValidity) return;
         
-        if (database.objects[selectedObjectIndex].Type != ObjectType.Boss && !CoinsManager.instance.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
+        if (database.objects[selectedObjectIndex].Type != ObjectType.Boss && !CoinsManager.RemoveCoins(database.objects[selectedObjectIndex].Price)) return;
 
         int index = objectPlacer.PlaceObject(database.objects[selectedObjectIndex].Prefab, objectPos, database.objects[selectedObjectIndex].Type);
 
@@ -55,7 +55,7 @@ public class PlacementState : IBuildingState
     {
         if (database.objects[selectedObjectIndex].Type == ObjectType.Boss)
         {
-            return (objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid) && !GameManager.instance.BossPlaced);
+            return (objectsData.CanPlaceObjectAt(gridPosition, database.objects[selectedObjectIndex].Size, grid) && !GameManager._instance.BossPlaced);
         }
         else
         {
