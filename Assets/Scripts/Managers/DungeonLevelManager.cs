@@ -61,7 +61,7 @@ public class DungeonLevelManager : MonoBehaviour
 
         levelModified?.Invoke(currentLevel);
         
-        if (currentLevel - 1 < roomsPerLevel.Count)
+        if (currentLevel - 1 < roomsPerLevel.Count && roomsPerLevel[currentLevel - 1] != null)
         {
             roomsPerLevel[currentLevel - 1].SetActive(true);
         }
